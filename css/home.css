@@ -1,10 +1,48 @@
-header {
+.navbar {
+    text-align: center;
     background-color: #987070;
+    padding: 5rem;
 }
 
-.navbar {
-    
-    align-items: center;
-    padding: .5rem;
-    height: 3rem;
+.navbar a{
+    color: #fff;
+}
+
+  
+#logo {
+    display: block;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 10px 0px;
+    margin: auto;
+    color: #fff;
+    background: #C39898;
+    transition: 1s;
+}
+
+#logo:hover {
+    background: #DBB5B5;
+}
+.nav-menu {
+    display: inline-block;
+    margin: 0 auto;
+    list-style: none;
+}
+  
+.nav-menu li {
+    display: inline-block;
+    padding: 5px 2em;
+}
+
+.nav-menu li a:hover{
+    color: #DBB5B5;
+}
+
+.container{
+    text-align: center;
+    margin: 2em;
+}
+
+.container a{
+    color: #987070;
 }
