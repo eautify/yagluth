@@ -1,0 +1,94 @@
+header {
+    background-color: #987070;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+    height: 3rem;
+}
+
+
+
+.navbar a{
+    color: #fff;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li a {
+    display: block; /* Ensures the entire area is clickable */
+    padding: 10px 30px;
+    text-decoration: none; /* Removes underline from links */
+    transition: background-color 1s ease; /* Smooth transition for hover effect */
+}
+
+.nav-menu li a:hover:not(.active) {
+    background-color: #DBB5B5;
+  }
+  
+.active {
+    background-color: #C39898;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nav-toggle-bar {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+}
+
+#logo {
+    border: 2px solid #fff;
+    border-radius: 5px;
+    padding: 3px 5mm;
+    color: #fff;
+    background: #C39898;
+    transition: 1s;
+}
+
+#logo:hover {
+    background: #DBB5B5;
+}
+
+
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #987070;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+}

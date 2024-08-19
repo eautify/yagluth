@@ -1,0 +1,10 @@
+header {
+    background-color: #987070;
+}
+
+.navbar {
+    
+    align-items: center;
+    padding: .5rem;
+    height: 3rem;
+}
