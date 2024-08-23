@@ -2,7 +2,7 @@
     text-align: center;
     margin: auto;
     padding: 3em;
-    border-bottom: 1px solid #987070 ;
+    border-bottom: 1px solid #222831 ;
     width: 60%;
     margin-bottom: 30px;
 }
@@ -11,12 +11,12 @@
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #987070;
+    color: #222831;
 }
   
  .heading p {
     font-size: 18px;
-    color: #6e5555;
+    color: #393E46;
 }
 
 .membercontainer {
@@ -29,11 +29,11 @@
 .member {   
     
     /* Card container */
-    background-color: #fdf6ea;
+    background-color: #f5faff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 250px;
+    width: 300px;
     margin: 15px;
     display: inline-block;
 }
@@ -60,38 +60,40 @@
 .member .info {
     /* Member info */
     text-align: center;
-    margin-top: 10px;
-    padding: 0 10px;
+    margin: 10px auto;
+    padding: 10px 0;
+    width: 80%;
+    border-bottom: 1px solid #666;
 }
 
-.member .info h2,p{
-    color: #6e5555;
+.member .info h2{
+    color: #00ADB5;
 }
   
 .member .info .name {
     /* Member name */
-    font-size: 18px;
+    font-size: 22px;
     font-weight: bold;
 }
   
 .member .info .title {
     /* Member title */
     font-weight: 500;
-    font-size: 14px;
-    color: #C39898;
+    font-size: 20px;
+    color: #393E46;
     margin: 10px 0;
 }
   
 .member .info .bio {
     /* Member bio */
-    font-size: 14px;
-    color: #a59a9a;
+    font-size: 18px;
+    color: #393E46;
 }
   
 .member .social-links {
     /* Social links */
     text-align: center;
-    padding: 10px 0;
+    margin-bottom: 10px;
 }
   
 .member .social-links a {

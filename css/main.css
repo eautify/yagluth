@@ -1,8 +1,11 @@
 *{
+    font-family: "Helvetica", sans-serif;    
     margin: 0;
     padding: 0;
-    font-family: Segoe UI, sans-serif;
-    color: #363636;
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
 }
 
 a {
@@ -10,9 +13,9 @@ a {
 }
 
 body{
-    background-color: #F1E5D1;
+    background-color: #EEEEEE;
 }
 
-main{
+.main{
     padding: 3%;
 }

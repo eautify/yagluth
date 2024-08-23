@@ -1,21 +1,20 @@
-header {
-    background-color: #987070;
-}
-
+/* Basic styles for the navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: .5rem;
-    height: 3rem;
+    padding: 10px 20px;
+    background-color: #222831;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
 }
 
-
-
-.navbar a{
-    color: #fff;
+#logo {
+    color: #00ADB5;
+    font-size: 24px;
+    font-weight: bold;
 }
 
+/* Nav menu styles */
 .nav-menu {
     list-style: none;
     display: flex;
@@ -23,68 +22,81 @@ header {
     padding: 0;
 }
 
+.nav-menu li {
+    padding: 0 1.5em;
+}
+
+.nav-menu a.active {
+    color: #00ADB5;
+}
+
 .nav-menu li a {
-    display: block; /* Ensures the entire area is clickable */
-    padding: 10px 30px;
-    text-decoration: none; /* Removes underline from links */
-    transition: background-color 1s ease; /* Smooth transition for hover effect */
+    color: #fff;
+    position: relative;
+
 }
 
-.nav-menu li a:hover:not(.active) {
-    background-color: #DBB5B5;
-  }
-  
-.active {
-    background-color: #C39898;
+/* Hover effect */
+.nav-menu li a:hover {
+    color: #00ADB5;
 }
 
+.nav-menu li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background-color: #00ADB5;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-menu li a:hover::after,
+.nav-menu li a.active::after {
+    transform: scaleX(1);
+}
+
+/* Toggle button styles */
 .nav-toggle {
     display: none;
     flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
 }
 
 .nav-toggle-bar {
-    width: 25px;
+    width: 100%;
     height: 3px;
-    background: #fff;
-    margin: 3px 0;
+    background-color: #fff;
+    border-radius: 2px;
 }
 
-#logo {
-    border: 2px solid #fff;
-    border-radius: 5px;
-    padding: 3px 5mm;
-    color: #fff;
-    background: #C39898;
-    transition: 1s;
-}
-
-#logo:hover {
-    background: #DBB5B5;
-}
-
-
+/* Responsive styles */
 @media (max-width: 768px) {
     .nav-menu {
+        background-color: #222831;
         display: none;
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 60px;
+        top: 50px;
         left: 0;
-        background-color: #987070;
+        gap: 8px;
+        z-index: 10; /* Ensure navbar is on top */
     }
 
-    .nav-menu.active {
+    .nav-menu.show {
         display: flex;
+    
     }
 
     .nav-menu li {
-        margin: 0;
         text-align: center;
     }
 
