@@ -1,0 +1,60 @@
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.preview-image {
+    width: 150px;
+    height: auto;
+    object-fit: scale-down;
+}
+
+.card-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.card-content h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-content p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.activity-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.activity-button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity #1 - Yagluth's</title>
+    <link rel="stylesheet" href="../../../static/css/main.css">
+    <link rel="stylesheet" href="../../../static/css/actlist/act1.css">
+    <link rel="stylesheet" href="../../../static/css/nav.css">
+    <script src="../../../static/js/nav.js"></script>
+    <script src="../../../static/js/actscripts.js"></script>
+    <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar">
+
+        <a href="../../index.html" id="logo">YAGLUTH's</a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li><a href="../../subpages/maindash.html">Main Menu</a></li>
+            <li><a href="../activitylist.html" class="active">Activity lists</a></li>
+            <li><a href="../developers.html">Developers</a></li>
+        </ul>
+
+    </nav>
+    <div class="main">
+        <div class="activity-page">
+            <h1>Activity 1: Temperature & Humidity Monitoring</h1>
+            <p>This activity involves monitoring temperature and humidity levels over time. Below are the graphs and live readings from the DHT sensor.</p>
+    
+            <!-- Live Readings Section -->
+            <div class="live-readings">
+                <h2>Current Readings</h2>
+                <p>Temperature: <span id="temperature">{{ temperature }} °C</span></p>
+                <p>Humidity: <span id="humidity">{{ humidity }} %</span></p>
+            </div>
+    
+            <!-- Temperature Graph -->
+            <div class="graph-container">
+                <h2>Temperature Over Time</h2>
+                <img src="../../static/assets/images/temperature-graph-placeholder.jpg" alt="Temperature Graph" class="graph-placeholder">
+                <p class="graph-description">This graph shows the temperature variations over a specific period.</p>
+            </div>
+    
+            <!-- Humidity Graph -->
+            <div class="graph-container">
+                <h2>Humidity Over Time</h2>
+                <img src="../../static/assets/images/humidity-graph-placeholder.jpg" alt="Humidity Graph" class="graph-placeholder">
+                <p class="graph-description">This graph displays the humidity levels recorded during the activity.</p>
+            </div>
+    
+            <!-- Additional Information -->
+            <div class="additional-info">
+                <h2>Additional Information</h2>
+                <p>In this activity, we used sensors to continuously monitor the temperature and humidity. The data collected helps in understanding the environment's conditions over time and adjusting them accordingly.</p>
+            </div>
+    
+            <!-- Back to Dashboard Button -->
+            <a href="dashboard.html" class="back-button">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>
