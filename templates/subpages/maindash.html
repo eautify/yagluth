@@ -13,24 +13,37 @@
 
 <body>
     <nav class="navbar">
-
         <a href="../index.html" id="logo">YAGLUTH's</a>
 
-        <button class="nav-toggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
         </button>
 
         <ul class="nav-menu">
-            <li><a href="../subpages/maindash.html" class="active">Main Menu</a></li>
-            <li><a href="activitylist.html">Activity lists</a></li>
+            <li><a href="maindash.html" class="active">Main Menu</a></li>
+            <li>
+                <a class="dropdown-arrow" onclick="toggleSubMenu()">Activity lists</a>
+                <ul class="sub-menus">
+                    <li><a href="activitylist/activity1.html">Activity #1</a></li>
+                    <li><a href="activitylist/activity2.html">Activity #2</a></li>
+                    <li><a href="#">Activity #3</a></li>
+                    <li><a href="#">Activity #4</a></li>
+                    <li><a href="#">Activity #5</a></li>
+                    <li><a href="#">Activity #6</a></li>
+                    <li><a href="#">Activity #7</a></li>
+                    <li><a href="#">Activity #8</a></li>
+                    <li><a href="#">Activity #9</a></li>
+                    <li><a href="#">Activity #10</a></li>
+                </ul>
+            </li>
             <li><a href="developers.html">Developers</a></li>
         </ul>
-
     </nav>
-    <div class="main">
-        
+    <div class="main-panel">
+        <!-- Content for the main panel -->
+         <h1>test</h1>
     </div>
 </body>
 </html>

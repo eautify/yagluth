@@ -1,8 +1,9 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+function toggleMenu() {
+    const navbar = document.querySelector('.navbar');
+    navbar.classList.toggle('expanded');
+}
 
-    navToggle.addEventListener('click', function () {
-        navMenu.classList.toggle('show');
-    });
-});
+function toggleSubMenu() {
+    const subMenu = document.querySelector('.sub-menus');
+    subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+}

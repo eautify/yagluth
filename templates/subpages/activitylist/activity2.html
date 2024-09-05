@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity #2 - Yagluth's</title>
+    <link rel="stylesheet" href="../../../static/css/main.css">
+    <link rel="stylesheet" href="../../../static/css/actlist/act2.css">
+    <link rel="stylesheet" href="../../../static/css/nav.css">
+    <script src="../../../static/js/nav.js"></script>
+    <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">
+</head>
+
+
+<body>
+    <nav class="navbar">
+        <a href="../../index.html" id="logo">YAGLUTH's</a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li><a href="../maindash.html" class="active">Main Menu</a></li>
+            <li>
+                <a class="dropdown-arrow" onclick="toggleSubMenu()">Activity lists</a>
+                <ul class="sub-menus">
+                    <li><a href="activity1.html">Activity #1</a></li>
+                    <li><a href="activity2.html">Activity #2</a></li>
+                    <li><a href="#">Activity #3</a></li>
+                    <li><a href="#">Activity #4</a></li>
+                    <li><a href="#">Activity #5</a></li>
+                    <li><a href="#">Activity #6</a></li>
+                    <li><a href="#">Activity #7</a></li>
+                    <li><a href="#">Activity #8</a></li>
+                    <li><a href="#">Activity #9</a></li>
+                    <li><a href="#">Activity #10</a></li>
+                </ul>
+            </li>
+            <li><a href="../developers.html">Developers</a></li>
+        </ul>
+    </nav>
+    <div class="main-panel">
+        <!-- Main content goes here -->
+        <h1 style="text-align: center; margin: 10px;">Activity #2</h1>
+        <div class="activity-page">
+            <h2 style="text-align: center;">RASPBERRY PI: Distance Sensor</h2>
+            <p>This laboratory activity focuses on integrating a distance sensor with a Raspberry Pi and creating a web-based interface to display real-time distance measurement.</p>
+
+            <div class="live-readings">
+                <h2>Current Readings</h2>
+                <p id="distanceSensor1">Distance #1: --</p>
+                <p id="distanceSensor2">Distance #2: --</p>
+                <select name="unit" id="unit">
+                    <option value="centimeter">Centimeter</option>
+                    <option value="inches">Inches</option>
+                    <option value="meter">Meter</option>
+                </select>
+            </div>
+
+            <!-- Historical Line Chart -->
+            <div class="line-chart">
+                <canvas id="distanceSensor1Chart"></canvas>
+                <p class="descrption"><span style="font-weight: bold;">Figure 1:</span>This graph shows the last 10 records of the first HC-S404.</p>
+                <canvas id="distanceSensor2Chart"></canvas>
+                <p class="descrption"><span style="font-weight: bold;">Figure 2:</span>This graph shows the last 10 records of the second HC-S404.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

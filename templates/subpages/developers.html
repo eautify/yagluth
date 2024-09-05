@@ -7,144 +7,153 @@
     <link rel="stylesheet" href="../../static/css/main.css">
     <link rel="stylesheet" href="../../static/css/developer.css">
     <link rel="stylesheet" href="../../static/css/nav.css">
-    <script src="../js/nav.js"></script>
+    <script src="../../static/js/nav.js"></script>
     <link rel="icon" href="../../static/assets/yagluth.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
-    <nav class="navbar">
+  <nav class="navbar">
+      <a href="../index.html" id="logo">YAGLUTH's</a>
 
-        <a href="../index.html" id="logo">YAGLUTH's</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+      </button>
 
-        <button class="nav-toggle" aria-label="Toggle navigation">
-            <span class="nav-toggle-bar"></span>
-            <span class="nav-toggle-bar"></span>
-            <span class="nav-toggle-bar"></span>
-        </button>
+      <ul class="nav-menu">
+          <li><a href="maindash.html">Main Menu</a></li>
+          <li>
+              <a class="dropdown-arrow" onclick="toggleSubMenu()">Activity lists</a>
+              <ul class="sub-menus">
+                  <li><a href="activitylist/activity1.html">Activity #1</a></li>
+                  <li><a href="activitylist/activity2.html">Activity #2</a></li>
+                  <li><a href="#">Activity #3</a></li>
+                  <li><a href="#">Activity #4</a></li>
+                  <li><a href="#">Activity #5</a></li>
+                  <li><a href="#">Activity #6</a></li>
+                  <li><a href="#">Activity #7</a></li>
+                  <li><a href="#">Activity #8</a></li>
+                  <li><a href="#">Activity #9</a></li>
+                  <li><a href="#">Activity #10</a></li>
+              </ul>
+          </li>
+          <li><a href="developers.html" class="active">Developers</a></li>
+      </ul>
+  </nav>
+  <div class="main-panel">
+      <div class="heading">
+          <h1>Team Yagluth</h1>
+          <p>Meet the creative minds and skilled talents driving this innovative project forward</p>
+      </div>
+      <div class="membercontainer">
 
-        <ul class="nav-menu">
-            <li><a href="../subpages/maindash.html">Main Menu</a></li>
-            <li><a href="activitylist.html">Activity lists</a></li>
-            <li><a href="developers.html" class="active">Developers</a></li>
-        </ul>
+          <div class="member">
+              <div class="profile-picture">
+                <img src="../../static/assets/profile/brian.jpg" alt="Profile Picture">
+              </div>
+              <div class="info">
+                <h2 class="name">Brian Balili</h2>
+                <p class="title">Leader / Main Programmer</p>
+                <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+              </div>
+              <div class="social-links">
+                <a href="https://www.facebook.com/irakkss" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:brian.balili3@gmail.com" target="_blank"><i class="fab fa-google"></i></a>
+              </div>
+          </div>
 
-    </nav>
-    <main>
-        <div class="container">
-            <div class="heading">
-                <h1>Team Yagluth</h1>
-                <p>Meet the creative minds and skilled talents driving this innovative project forward</p>
-            </div>
-            <div class="membercontainer">
+          <div class="member">
+              <div class="profile-picture">
+                <img src="../../static/assets/profile/klarenz.jpg" alt="Profile Picture">
+              </div>
+              <div class="info">
+                <h2 class="name">Klarenz Paul Evasco</h2>
+                <p class="title">Programmer</p>
+                <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+              </div>
+              <div class="social-links">
+                <a href="https://www.facebook.com/klarenz03" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-google"></i></a>
+              </div>
+          </div>
 
-                <div class="member">
-                    <div class="profile-picture">
-                      <img src="../../static/assets/profile/brian.jpg" alt="Profile Picture">
-                    </div>
-                    <div class="info">
-                      <h2 class="name">Brian Balili</h2>
-                      <p class="title">Leader / Main Programmer</p>
-                      <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-                    </div>
-                    <div class="social-links">
-                      <a href="https://www.facebook.com/irakkss" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                      <a href="mailto:brian.balili3@gmail.com" target="_blank"><i class="fab fa-google"></i></a>
-                    </div>
-                </div>
+          <div class="member">
+              <div class="profile-picture">
+                <img src="https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg" alt="Profile Picture">
+              </div>
+              <div class="info">
+                <h2 class="name">Bien Lorenz Jaramillo</h2>
+                <p class="title">Programmer</p>
+                <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+              </div>
+              <div class="social-links">
+                <a href="https://www.facebook.com/renz.bienjaramillo" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
+              </div>
+          </div>
 
-                <div class="member">
-                    <div class="profile-picture">
-                      <img src="../../static/assets/profile/klarenz.jpg" alt="Profile Picture">
-                    </div>
-                    <div class="info">
-                      <h2 class="name">Klarenz Paul Evasco</h2>
-                      <p class="title">Programmer</p>
-                      <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-                    </div>
-                    <div class="social-links">
-                      <a href="https://www.facebook.com/klarenz03" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                      <a href="#" target="_blank"><i class="fab fa-google"></i></a>
-                    </div>
-                </div>
-    
-                <div class="member">
-                    <div class="profile-picture">
-                      <img src="https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg" alt="Profile Picture">
-                    </div>
-                    <div class="info">
-                      <h2 class="name">Bien Lorenz Jaramillo</h2>
-                      <p class="title">Programmer</p>
-                      <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-                    </div>
-                    <div class="social-links">
-                      <a href="https://www.facebook.com/renz.bienjaramillo" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                      <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
-                    </div>
-                </div>
+          <div class="member">
+              <div class="profile-picture">
+                <img src="../../static/assets/profile/jenny.jpg" alt="Profile Picture">
+              </div>
+              <div class="info">
+                <h2 class="name">Jennifer Joy Francisco</h2>
+                <p class="title">Hardware</p>
+                <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+              </div>
+              <div class="social-links">
+                <a href="https://www.facebook.com/jen.frncsco" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
+              </div>
+          </div>
 
-                <div class="member">
-                    <div class="profile-picture">
-                      <img src="../../static/assets/profile/jenny.jpg" alt="Profile Picture">
-                    </div>
-                    <div class="info">
-                      <h2 class="name">Jennifer Joy Francisco</h2>
-                      <p class="title">Hardware</p>
-                      <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-                    </div>
-                    <div class="social-links">
-                      <a href="https://www.facebook.com/jen.frncsco" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                      <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
-                    </div>
-                </div>
+          <div class="member">
+              <div class="profile-picture">
+                <img src="../../static/assets/profile/kurt.jpg" alt="Profile Picture">
+              </div>
+              <div class="info">
+                <h2 class="name">Kurt Adrian Tumamac</h2>
+                <p class="title">Hardware</p>
+                <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+              </div>
+              <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100008934452503" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
+              </div>
+          </div>
 
-            <div class="member">
-                <div class="profile-picture">
-                  <img src="../../static/assets/profile/kurt.jpg" alt="Profile Picture">
-                </div>
-                <div class="info">
-                  <h2 class="name">Kurt Adrian Tumamac</h2>
-                  <p class="title">Hardware</p>
-                  <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-                </div>
-                <div class="social-links">
-                  <a href="https://www.facebook.com/profile.php?id=100008934452503" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                  <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
-                </div>
-            </div>
-
-            <div class="member">
-                <div class="profile-picture">
-                  <img src="../../static/assets/profile/hanz.jpg" alt="Profile Picture">
-                </div>
-                <div class="info">
-                  <h2 class="name">Hanz Dulay</h2>
-                  <p class="title">Researcher</p>
-                  <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-                </div>
-                <div class="social-links">
-                  <a href="https://www.facebook.com/Nyentai" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                  <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
-                </div>
-            </div>
-            
-            <div class="member">
-                <div class="profile-picture">
-                  <img src="../../static/assets/profile/benedict.jpg" alt="Profile Picture">
-                </div>
-                <div class="info">
-                  <h2 class="name">Benedict Ledda</h2>
-                  <p class="title">Documentation</p>
-                  <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-                </div>
-                <div class="social-links">
-                  <a href="https://www.facebook.com/bee3boi1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                  <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
-                </div>
-            </div>
-                
-            </div>
+          <div class="member">
+              <div class="profile-picture">
+                <img src="../../static/assets/profile/hanz.jpg" alt="Profile Picture">
+              </div>
+              <div class="info">
+                <h2 class="name">Hanz Dulay</h2>
+                <p class="title">Researcher</p>
+                <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+              </div>
+              <div class="social-links">
+                <a href="https://www.facebook.com/Nyentai" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
+              </div>
+          </div>
+          
+          <div class="member">
+              <div class="profile-picture">
+                <img src="../../static/assets/profile/benedict.jpg" alt="Profile Picture">
+              </div>
+              <div class="info">
+                <h2 class="name">Benedict Ledda</h2>
+                <p class="title">Documentation</p>
+                <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+              </div>
+              <div class="social-links">
+                <a href="https://www.facebook.com/bee3boi1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:#" target="_blank"><i class="fab fa-google"></i></a>
+              </div>
         </div>
-    </main>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,61 +1,78 @@
-/* Basic styles for the navbar */
+/* Navbar styles */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
     background-color: #222831;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.4);
+    color: #fff;
+    position: fixed;
+    height: 100%;
+    width: 15%; /* Keep the width within the screen */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    left: 0; /* Ensure it stays at the left */
 }
 
 #logo {
-    color: #00ADB5;
     font-size: 24px;
     font-weight: bold;
+    text-decoration: none;
+    color: #00ADB5;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-/* Nav menu styles */
 .nav-menu {
-    list-style: none;
-    display: flex;
-    margin: 0;
+    list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .nav-menu li {
-    padding: 0 1.5em;
-}
-
-.nav-menu a.active {
-    color: #00ADB5;
-}
-
-.nav-menu li a {
-    color: #fff;
+    margin-bottom: 20px;
     position: relative;
-
 }
 
-/* Hover effect */
-.nav-menu li a:hover {
-    color: #00ADB5;
+/* Ensure links take full width without overlap */
+.nav-menu a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 15px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.nav-menu li a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 100%;
-    height: 2px;
+/* Hover effect with a smooth slide-in from left */
+.nav-menu a:hover {
     background-color: #00ADB5;
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transform: translateX(10px); /* Slide-in animation */
 }
 
-.nav-menu li a:hover::after,
-.nav-menu li a.active::after {
-    transform: scaleX(1);
+/* Active state with color and slight shadow */
+.nav-menu a.active {
+    background-color: #00ADB5;
+    box-shadow: inset 3px 0px 0px 0px #fff; /* Left white border highlight */
+}
+
+/* Sub-menu styles */
+.sub-menus {
+    list-style-type: none;
+    padding-left: 20px;
+    display: none;
+    margin: 10px 0;
+}
+
+.sub-menus a {
+    background-color: #393E46;
+    padding: 10px 20px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+/* Smooth animation for opening submenus */
+.sub-menus a:hover {
+    background-color: #00ADB5;
+    transform: translateX(10px); /* Same slide-in effect */
 }
 
 /* Toggle button styles */
@@ -77,30 +94,51 @@
     border-radius: 2px;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-    .nav-menu {
-        background-color: #222831;
-        display: none;
-        flex-direction: column;
+/* Main panel */
+.main-panel {
+    margin-left: 15%; /* The space left for the navbar */
+    padding: 20px;
+    background-color: #eee;
+    min-height: 100vh;
+    box-sizing: border-box; /* Ensure padding and borders don't affect width */
+}
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .navbar {
+        position: relative;
+        height: auto;
         width: 100%;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        gap: 8px;
-        z-index: 10; /* Ensure navbar is on top */
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    .nav-menu.show {
-        display: flex;
-    
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        background-color: #222831;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
     }
 
     .nav-menu li {
-        text-align: center;
+        margin: 0;
+    }
+
+    .sub-menus {
+        padding-left: 0;
     }
 
     .nav-toggle {
+        display: flex;
+    }
+
+    .main-panel {
+        margin-left: 0;
+    }
+
+    .navbar.expanded .nav-menu {
         display: flex;
     }
 }

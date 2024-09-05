@@ -13,23 +13,35 @@
 
 <body>
     <nav class="navbar">
-
         <a href="../index.html" id="logo">YAGLUTH's</a>
 
-        <button class="nav-toggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
         </button>
 
         <ul class="nav-menu">
-            <li><a href="../subpages/maindash.html">Main Menu</a></li>
-            <li><a href="activitylist.html" class="active">Activity lists</a></li>
-            <li><a href="developers.html">Developers</a></li>
+            <li><a href="maindash.html" class="active">Main Menu</a></li>
+            <li>
+                <a class="dropdown-arrow" onclick="toggleSubMenu()">Activity lists</a>
+                <ul class="sub-menus">
+                    <li><a href="activitylist/activity1.html">Activity #1</a></li>
+                    <li><a href="activitylist/activity2.html">Activity #2</a></li>
+                    <li><a href="#">Activity #3</a></li>
+                    <li><a href="#">Activity #4</a></li>
+                    <li><a href="#">Activity #5</a></li>
+                    <li><a href="#">Activity #6</a></li>
+                    <li><a href="#">Activity #7</a></li>
+                    <li><a href="#">Activity #8</a></li>
+                    <li><a href="#">Activity #9</a></li>
+                    <li><a href="#">Activity #10</a></li>
+                </ul>
+            </li>
+            <li><a href="../developers.html">Developers</a></li>
         </ul>
-
     </nav>
-    <div class="main">
+    <div class="main-panel">
         <div class="dashboard">
             <h1>Activity Dashboard</h1>
             
@@ -49,7 +61,7 @@
                     <h2>Activity Title 2</h2>
                     <p>Activity Number: 002</p>
                     <p class="description">This is a short description of the second activity. It gives an overview of what the activity is about.</p>
-                    <a href="activitylist/comingsoon.html" class="activity-button">Go to Activity</a>
+                    <a href="activitylist/activity2.html" class="activity-button">Go to Activity</a>
                 </div>
             </div>
     

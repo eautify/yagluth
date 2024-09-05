@@ -16,20 +16,37 @@
 <body>
     <nav class="navbar">
         <a href="../../index.html" id="logo">YAGLUTH's</a>
-        <button class="nav-toggle" aria-label="Toggle navigation">
+
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
             <span class="nav-toggle-bar"></span>
         </button>
+
         <ul class="nav-menu">
-            <li><a href="../../subpages/maindash.html">Main Menu</a></li>
-            <li><a href="../activitylist.html" class="active">Activity lists</a></li>
+            <li><a href="../maindash.html">Main Menu</a></li>
+            <li>
+                <a class="dropdown-arrow" onclick="toggleSubMenu()" class="active">Activity lists</a>
+                <ul class="sub-menus">
+                    <li><a href="activity1.html" class="active">Activity #1</a></li>
+                    <li><a href="activity2.html">Activity #2</a></li>
+                    <li><a href="comingsoon.html">Activity #3</a></li>
+                    <li><a href="comingsoon.html">Activity #4</a></li>
+                    <li><a href="comingsoon.html">Activity #5</a></li>
+                    <li><a href="comingsoon.html">Activity #6</a></li>
+                    <li><a href="comingsoon.html">Activity #7</a></li>
+                    <li><a href="comingsoon.html">Activity #8</a></li>
+                    <li><a href="comingsoon.html">Activity #9</a></li>
+                    <li><a href="comingsoon.html">Activity #10</a></li>
+                </ul>
+            </li>
             <li><a href="../developers.html">Developers</a></li>
         </ul>
     </nav>
-    <div class="main">
+    <div class="main-panel">
+        <h1 style="text-align: center; margin: 10px;">Activity #1</h1>
         <div class="activity-page">
-            <h1>RASPBERRY PI: Humidity and Temperature Sensor</h1>
+            <h2 style="text-align: center;">RASPBERRY PI: Humidity and Temperature Sensor</h2>
             <p>This activity involves monitoring temperature and humidity levels over time. Below are the graphs and live readings from the DHT sensor.</p>
 
             <!-- Horizontal Bar Charts -->

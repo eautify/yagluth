@@ -4,18 +4,40 @@
     padding: 0;
 }
 
-body::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-}
 
 a {
     text-decoration: none;
 }
 
-body{
+body {
+    font-family: "Helvetica", sans-serif;   
     background-color: #EEEEEE;
+    color: #0a0a0a;
+    margin: 0;
+    overflow-x: hidden; /* This prevents the horizontal scroll bar */
 }
 
-.main{
+
+.main-panel {
     padding: 3%;
+    width: 85%;
+}
+
+li {
+    list-style: none;
+}
+
+.activity-page {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #e4e4e4;
+}
+
+.activity-page h1 {
+    color: #333;
+    margin-bottom: 20px;
 }

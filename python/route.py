@@ -72,7 +72,7 @@ class FlaskRoutes:
                 }
             return jsonify(data)
         
-        @self.app.route('/history')
+        @self.app.route('/history-dht')
         def get_historical_data():
             readings = self.get_historical_readings()
             data = []

@@ -79,7 +79,7 @@ function handleTemperatureNotification(temperature) {
 // Function to fetch and render historical data charts
 async function fetchAndRenderHistory() {
     try {
-        const response = await fetch('/history');
+        const response = await fetch('/history-dht');
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
 
