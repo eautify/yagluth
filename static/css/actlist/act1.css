@@ -1,5 +1,8 @@
 .live-readings{
     margin-top: 30px;
+    background-color: #ccc;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .descrption {
@@ -94,3 +97,22 @@
     color: #333;
 }
 
+.dhtWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.cont {
+    width: 40%;
+    background-color: #e4e4e4;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: left;
+}
+
+.temp {
+    display: flex;
+    justify-content: space-between;
+}

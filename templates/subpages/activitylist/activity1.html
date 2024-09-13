@@ -51,29 +51,35 @@
 
             <!-- Horizontal Bar Charts -->
             <div class="live-readings">
-                <h2>Current Readings</h2>
-                <p id="temperature">Temperature: --</p>
-                <select name="unit" id="unit">
-                    <option value="celsius">Celsius</option>
-                    <option value="kelvin">Kelvin</option>
-                    <option value="fahrenheit">Fahrenheit</option>
-                </select>
-
-                
-                <div class="bar-container">
-                    <div id="temperature-bar" class="bar temperature-bar"></div>
-                </div>
-                <p id="humidity">Humidity: --</p>
-                <div class="bar-container">
-                    <div id="humidity-bar" class="bar humidity-bar"></div>
+                <h2 style="text-align: center;">Current Readings</h2>
+                <div class="dhtWrapper">
+                    <div class="cont">
+                        <div class="temp">                            
+                            <p id="temperature">Temperature: --</p>
+                            <select name="unit" id="unit">
+                                <option value="celsius">Celsius</option>
+                                <option value="kelvin">Kelvin</option>
+                                <option value="fahrenheit">Fahrenheit</option>
+                            </select>
+                        </div>
+                        <div class="bar-container">
+                            <div id="temperature-bar" class="bar temperature-bar"></div>
+                        </div>
+                    </div>
+                    <div class="cont">
+                        <p id="humidity">Humidity: --</p>
+                        <div class="bar-container">
+                            <div id="humidity-bar" class="bar humidity-bar"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Historical Line Chart -->
             <div class="line-chart">
-                <canvas id="temperatureChart"></canvas>
+                <canvas id="temperatureChart" style="margin:  20px;"></canvas>
                 <p class="descrption"><span style="font-weight: bold;">Figure 1:</span>This graph shows the last 10 records of the temperature.</p>
-                <canvas id="humidityChart"></canvas>
+                <canvas id="humidityChart" style="margin:  20px;"></canvas>
                 <p class="descrption"><span style="font-weight: bold;">Figure 2:</span>This graph shows the last 10 records of the humidity.</p>
             </div>
         </div>

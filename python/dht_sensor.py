@@ -9,10 +9,13 @@ import digitalio
 class DHTSensor:
     def __init__(self):
         self.dht_device = adafruit_dht.DHT22(board.D4, use_pulseio=False)
-        self.buzzer = digitalio.DigitalInOut(board.D18)
+        self.buzzer = digitalio.DigitalInOut(board.D17)
         self.buzzer.direction = digitalio.Direction.OUTPUT
         self.conn = sqlite3.connect('database/sensor_data.db')
         self.create_table()
+
+    def set_receiver(self, receiver):
+        self.receiver = receiver
 
     def create_table(self):
         with self.conn:
@@ -30,7 +33,7 @@ class DHTSensor:
 
             if temperature >= 32:
                 self.buzzer.value = True
-            elif temperature <31.9:
+            else:
                 self.buzzer.value = False
 
             now = datetime.now()
@@ -41,7 +44,10 @@ class DHTSensor:
                 self.conn.execute("INSERT INTO dhtreadings (temperature, humidity, date, time) VALUES (?, ?, ?, ?)",
                                   (temperature, humidity, date_str, time_str))
 
-            print(f"Temp: {temperature:.1f} C, Humidity: {humidity:.1f}%")
+            print(f"Saved to DB: Temp={temperature:.1f} C, Humidity={humidity:.1f}%, Date={date_str}, Time={time_str}")
+
+            if self.receiver:
+                self.receiver.get_dht22(temperature, humidity)  # Corrected here
 
         except RuntimeError as error:
             print(f"Error reading sensor: {error}")

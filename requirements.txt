@@ -2,13 +2,15 @@ Adafruit-Blinka==8.47.0
 adafruit-circuitpython-busdevice==5.2.9
 adafruit-circuitpython-connectionmanager==3.1.1
 adafruit-circuitpython-dht==4.0.4
-adafruit-circuitpython-display_shapes==2.8.3
 adafruit-circuitpython-framebuf==1.6.5
+adafruit-circuitpython-hcsr04==0.4.18
 adafruit-circuitpython-requests==4.1.6
 adafruit-circuitpython-ssd1306==2.12.17
 adafruit-circuitpython-typing==1.11.0
+Adafruit-GPIO==1.0.3
 Adafruit-PlatformDetect==3.74.0
 Adafruit-PureIO==1.1.11
+Adafruit-SSD1306==1.6.2
 binho-host-adapter==0.1.6
 blinker==1.8.2
 click==8.1.7
@@ -22,6 +24,7 @@ pyserial==3.5
 pyusb==1.2.1
 rpi-ws281x==5.0.0
 RPi.GPIO==0.7.1
+spidev==3.6
 sysv-ipc==1.1.0
 typing_extensions==4.12.2
 Werkzeug==3.0.4

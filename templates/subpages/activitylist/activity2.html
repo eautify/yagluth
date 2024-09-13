@@ -6,9 +6,13 @@
     <title>Activity #2 - Yagluth's</title>
     <link rel="stylesheet" href="../../../static/css/main.css">
     <link rel="stylesheet" href="../../../static/css/actlist/act2.css">
+    <link rel="stylesheet" href="../../../static/css/actlist/act1.css">
     <link rel="stylesheet" href="../../../static/css/nav.css">
     <script src="../../../static/js/nav.js"></script>
+    <script src="../../../static/js/act1.js"></script>
+    <script src="../../../static/js/act2.js"></script>
     <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 
@@ -23,12 +27,12 @@
         </button>
 
         <ul class="nav-menu">
-            <li><a href="../maindash.html" class="active">Main Menu</a></li>
+            <li><a href="../maindash.html">Main Menu</a></li>
             <li>
-                <a class="dropdown-arrow" onclick="toggleSubMenu()">Activity lists</a>
+                <a class="dropdown-arrow" onclick="toggleSubMenu()" class="active">Activity lists</a>
                 <ul class="sub-menus">
                     <li><a href="activity1.html">Activity #1</a></li>
-                    <li><a href="activity2.html">Activity #2</a></li>
+                    <li><a href="activity2.html" class="active">Activity #2</a></li>
                     <li><a href="#">Activity #3</a></li>
                     <li><a href="#">Activity #4</a></li>
                     <li><a href="#">Activity #5</a></li>
@@ -50,23 +54,65 @@
             <p>This laboratory activity focuses on integrating a distance sensor with a Raspberry Pi and creating a web-based interface to display real-time distance measurement.</p>
 
             <div class="live-readings">
-                <h2>Current Readings</h2>
-                <p id="distanceSensor1">Distance #1: --</p>
-                <p id="distanceSensor2">Distance #2: --</p>
-                <select name="unit" id="unit">
+                <h2 style="text-align: center;">Current Readings</h2>
+                <div class="distanceWrappper">
+                    <div class="distanceReadings">      
+                        <div id="distance1" class="readings">
+                            <p style="font-weight: bold;">Distance #1</p><p class="values" id="distanceSensor1">--</p>
+                        </div>           
+                        <div id="distance2" class="readings">
+                            <p style="font-weight: bold;">Distance #2</p><p class="values" id="distanceSensor2">--</p>
+                        </div>   
+                    </div>
+                <!-- </div>
+                <select name="unit-distance" id="unit-distance" class="drop">
                     <option value="centimeter">Centimeter</option>
                     <option value="inches">Inches</option>
                     <option value="meter">Meter</option>
-                </select>
+                </select> -->
+
+                <div class="dht22">
+                    <div class="cont">
+                        <div class="temp">                            
+                            <p id="temperature">Temperature: --</p>
+                            <select name="unit" id="unit">
+                                <option value="celsius">Celsius</option>
+                                <option value="kelvin">Kelvin</option>
+                                <option value="fahrenheit">Fahrenheit</option>
+                            </select>
+                        </div>
+                        <div class="bar-container">
+                            <div id="temperature-bar" class="bar temperature-bar"></div>
+                        </div>
+                    </div>
+                    <div class="cont">
+                        <p id="humidity">Humidity: --</p>
+                        <div class="bar-container">
+                            <div id="humidity-bar" class="bar humidity-bar"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Historical Line Chart -->
             <div class="line-chart">
-                <canvas id="distanceSensor1Chart"></canvas>
-                <p class="descrption"><span style="font-weight: bold;">Figure 1:</span>This graph shows the last 10 records of the first HC-S404.</p>
-                <canvas id="distanceSensor2Chart"></canvas>
-                <p class="descrption"><span style="font-weight: bold;">Figure 2:</span>This graph shows the last 10 records of the second HC-S404.</p>
+                <canvas id="distanceChart" style="margin: 20px;"></canvas>
+                <p class="descrption" style="text-align: center;"><span style="font-weight: bold;">Figure 1:</span>This graph displays the sensor readings from the two HC-SR04 over the past 5 minutes.</p>
             </div>
+
+            <div class="notifwrapper">
+                <div id="sensor1" class="notification-distance">
+                    <img id="buzzerImage1" src="../../../static/assets/images/buzzer_off.png" class="buzzer">
+                    <span class="message">Distance is safe</span>
+                </div>
+    
+                <div id="sensor2" class="notification-distance">
+                    <img id="buzzerImage2" src="../../../static/assets/images/buzzer_off.png" class="buzzer">
+                    <span class="message">Distance is safe</span>
+                </div>
+            </div>
+            
+
         </div>
     </div>
 </body>
