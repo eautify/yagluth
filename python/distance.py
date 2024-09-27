@@ -101,16 +101,16 @@ class DistanceMonitor:
                     self.distance1 = current_distance1
                     self.distance2 = current_distance2
 
-                if self.distance1 <= self.threshold or self.distance2 <= self.threshold:
+                if self.distance1 >= self.threshold or self.distance2 >= self.threshold:
                     self.buzzer.value = True
                 else:
                     self.buzzer.value = False
 
                 self.draw.rectangle((0, 0, self.disp.width, self.disp.height), outline=0, fill=0)
                 self.draw.text((0, 0), f'Distance 1: {self.distance1:.2f} cm', font=self.font, fill=255)
-                self.draw.text((0, 10), 'DISTANCE TOO CLOSE' if self.distance1 <= self.threshold else 'DISTANCE IS SAFE', font=self.font, fill=255)
+                self.draw.text((0, 10), 'DISTANCE TOO CLOSE' if self.distance1 >= self.threshold else 'DISTANCE IS SAFE', font=self.font, fill=255)
                 self.draw.text((0, 25), f'Distance 2: {self.distance2:.2f} cm', font=self.font, fill=255)
-                self.draw.text((0, 35), 'DISTANCE TOO CLOSE' if self.distance2 <= self.threshold else 'DISTANCE IS SAFE', font=self.font, fill=255)
+                self.draw.text((0, 35), 'DISTANCE TOO CLOSE' if self.distance2 >= self.threshold else 'DISTANCE IS SAFE', font=self.font, fill=255)
                 self.disp.image(self.image)
                 self.disp.show()
 

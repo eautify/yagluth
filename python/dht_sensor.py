@@ -8,11 +8,16 @@ import digitalio
 
 class DHTSensor:
     def __init__(self):
-        self.dht_device = adafruit_dht.DHT22(board.D4, use_pulseio=False)
-        self.buzzer = digitalio.DigitalInOut(board.D17)
+        self.dht_device = adafruit_dht.DHT22(board.D23, use_pulseio=False)
+        self.buzzer = digitalio.DigitalInOut(board.D22)
         self.buzzer.direction = digitalio.Direction.OUTPUT
         self.conn = sqlite3.connect('database/sensor_data.db')
+        self.temperature = None
+        self.humidity = None
         self.create_table()
+        
+        # Reference to another class to send readings
+        self.receiver = None
 
     def set_receiver(self, receiver):
         self.receiver = receiver
@@ -28,10 +33,17 @@ class DHTSensor:
 
     def read_sensor(self):
         try:
-            temperature = self.dht_device.temperature
-            humidity = self.dht_device.humidity
+            self.temperature = self.dht_device.temperature
+            self.humidity = self.dht_device.humidity
 
-            if temperature >= 32:
+            if self.receiver:
+                # Update this line to call the correct method
+                self.receiver.get_DHT22(self.temperature, self.humidity)
+            
+            if self.receiver:
+                self.receiver.receive_dht_values(self.temperature, self.humidity)
+
+            if self.temperature >= 32:
                 self.buzzer.value = True
             else:
                 self.buzzer.value = False
@@ -42,18 +54,16 @@ class DHTSensor:
 
             with self.conn:
                 self.conn.execute("INSERT INTO dhtreadings (temperature, humidity, date, time) VALUES (?, ?, ?, ?)",
-                                  (temperature, humidity, date_str, time_str))
+                                (self.temperature, self.humidity, date_str, time_str))
 
-            print(f"Saved to DB: Temp={temperature:.1f} C, Humidity={humidity:.1f}%, Date={date_str}, Time={time_str}")
-
-            if self.receiver:
-                self.receiver.get_dht22(temperature, humidity)  # Corrected here
+            print(f"Saved to DB: Temp={self.temperature:.1f} C, Humidity={self.humidity:.1f}%, Date={date_str}, Time={time_str}")
 
         except RuntimeError as error:
             print(f"Error reading sensor: {error}")
         except Exception as error:
             self.dht_device.exit()
             raise error
+
 
     def run(self):
         while True:

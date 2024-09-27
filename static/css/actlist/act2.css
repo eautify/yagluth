@@ -1,13 +1,48 @@
 .distanceReadings{
+    padding: 5px;
+    text-align: center;
+    margin: 5px;
+}
+.dht22{
+    display:flex;
+    justify-content: center;
+
+}
+.distances{
     display: flex;
-    justify-content: space-around;
-    align-content: center;
+    justify-content: space-between;
+}
+.readings{
+    padding: 50px;
 }
 
+.distanceBoard {
+    display: flex;
+    justify-content: space-evenly;  
+}
+
+.contentWrap{
+    padding: 10px;
+}
+
+.distanceBoard{
+    align-items: center;
+}
+
+.dropdown{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px;
+    border-radius: 5px;
+}
 .values{
     font-size: 1.5rem;
     text-align: center;
 }
+
+
+
+
 
 .notification-distance {
     display: flex;
@@ -18,7 +53,7 @@
     margin: 20px auto;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    max-width: 200px;
     text-align: center;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -65,28 +100,45 @@
     font-weight: bold;
 }
 
-.readings {
-    background-color: #e4e4e4;
-    border-radius: 5px;
-    width: 40%;
-    text-align: center;
-    padding: 20px;
-    margin: 10px 0;
+/* Legends Section */
+.legends {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    max-width: 250px;
 }
 
-.notifwrapper {
-    display: flex;
+.legends h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #232323;
 }
 
-.live-readings{
-    margin: 20px;
-    background-color: #EEEE;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
+.legends p {
+    font-size: 16px;
+    color: #191919;
+    margin: 5px 0;
 }
 
-.dht22 {
-    display: flex;
-    justify-content: space-around;
+/* Color-coded levels */
+.legend-level {
+    font-weight: bold;
+}
+
+/* Color for 'Good' level */
+.legend-level.good {
+    color: #4caf50; /* Green */
+}
+
+/* Color for 'Safe' level */
+.legend-level.safe {
+    color: #ffc107; /* Yellow/Amber */
+}
+
+/* Color for 'Unsafe' level */
+.legend-level.unsafe {
+    color: #f44336; /* Red */
 }

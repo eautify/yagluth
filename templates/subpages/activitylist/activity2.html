@@ -27,91 +27,126 @@
         </button>
 
         <ul class="nav-menu">
-            <li><a href="../maindash.html">Main Menu</a></li>
             <li>
                 <a class="dropdown-arrow" onclick="toggleSubMenu()" class="active">Activity lists</a>
                 <ul class="sub-menus">
                     <li><a href="activity1.html">Activity #1</a></li>
                     <li><a href="activity2.html" class="active">Activity #2</a></li>
-                    <li><a href="#">Activity #3</a></li>
-                    <li><a href="#">Activity #4</a></li>
-                    <li><a href="#">Activity #5</a></li>
-                    <li><a href="#">Activity #6</a></li>
-                    <li><a href="#">Activity #7</a></li>
-                    <li><a href="#">Activity #8</a></li>
-                    <li><a href="#">Activity #9</a></li>
-                    <li><a href="#">Activity #10</a></li>
+                    <li><a href="activity3.html">Activity #3</a></li>
+                    <li><a href="activity4.html">Activity #4</a></li>
+                    <li><a href="comingsoon.html">Activity #5</a></li>
+                    <li><a href="comingsoon.html">Activity #6</a></li>
+                    <li><a href="comingsoon.html">Activity #7</a></li>
+                    <li><a href="comingsoon.html">Activity #8</a></li>
+                    <li><a href="comingsoon.html">Activity #9</a></li>
+                    <li><a href="comingsoon.html">Activity #10</a></li>
                 </ul>
             </li>
             <li><a href="../developers.html">Developers</a></li>
         </ul>
     </nav>
     <div class="main-panel">
-        <!-- Main content goes here -->
-        <h1 style="text-align: center; margin: 10px;">Activity #2</h1>
-        <div class="activity-page">
-            <h2 style="text-align: center;">RASPBERRY PI: Distance Sensor</h2>
-            <p>This laboratory activity focuses on integrating a distance sensor with a Raspberry Pi and creating a web-based interface to display real-time distance measurement.</p>
-
+        <div class="actBody">
+            <div class="actTitle">
+                <h1>Distance Sensor</h1>
+                <p>This activity involves using an ultrasonic sensor to measure and display distance readings.</p>
+            </div>
             <div class="live-readings">
-                <h2 style="text-align: center;">Current Readings</h2>
-                <div class="distanceWrappper">
-                    <div class="distanceReadings">      
-                        <div id="distance1" class="readings">
-                            <p style="font-weight: bold;">Distance #1</p><p class="values" id="distanceSensor1">--</p>
-                        </div>           
-                        <div id="distance2" class="readings">
-                            <p style="font-weight: bold;">Distance #2</p><p class="values" id="distanceSensor2">--</p>
-                        </div>   
-                    </div>
-                <!-- </div>
-                <select name="unit-distance" id="unit-distance" class="drop">
-                    <option value="centimeter">Centimeter</option>
-                    <option value="inches">Inches</option>
-                    <option value="meter">Meter</option>
-                </select> -->
-
-                <div class="dht22">
-                    <div class="cont">
-                        <div class="temp">                            
-                            <p id="temperature">Temperature: --</p>
-                            <select name="unit" id="unit">
-                                <option value="celsius">Celsius</option>
-                                <option value="kelvin">Kelvin</option>
-                                <option value="fahrenheit">Fahrenheit</option>
-                            </select>
+                <h2 class="title-center" style="text-align: center;">Current Readings</h2>
+                
+                <div class="contentWrap">
+                    <div class="distanceWrapper">
+                        <div class="distanceReadings">
+                            <div class="distanceBoard"> 
+                                <div class="distances">                           
+                                    <!-- Distance 1 -->
+                                    <div id="distance1" class="readings card">
+                                        <p class="distance-label">Distance #1:</p>
+                                        <p style="margin: 10px;" class="values" id="distanceSensor1">--</p>
+                                        <div id="sensor1" class="notification-distance">
+                                            <img id="buzzerImage1" src="../../../static/assets/images/buzzer_off.png" class="buzzer">
+                                            <span class="messageDistance">Distance is safe</span>
+    
+                                        </div>
+                                    </div>
+                
+                                    <!-- Distance 2 -->
+                                    <div id="distance2" class="readings card">
+                                        <p class="distance-label">Distance #2:</p>
+                                        <p style="margin: 10px;" class="values" id="distanceSensor2">--</p>
+                                        <div id="sensor2" class="notification-distance">
+                                            <img id="buzzerImage2" src="../../../static/assets/images/buzzer_off.png" class="buzzer">
+                                            <span class="messageDistance">Distance is safe</span>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="legends card">
+                                    <h5>Legends:</h5>
+                                    <p>1cm - 5cm: <span class="legend-level good">Good</span></p>
+                                    <p>6cm - 12cm: <span class="legend-level safe">Safe</span></p>
+                                    <p>> 12cm: <span class="legend-level unsafe">Unsafe</span></p>
+                                </div>
+                                
+                                
+                                
+                            </div>
+            
+                            <!-- Dropdowns for unit selection -->
+                            <div class="dropdown">
+                                <div class="distanceDrop" style="display: flex;">
+                                    <p>Convert distance to: </p>
+                                    <select name="unit-distance" id="unit-distance" class="drop">
+                                        <option value="cm">Centimeter (cm)</option>
+                                        <option value="mm">Millimeter (mm)</option>
+                                        <option value="meter">Meter (m)</option>
+                                        <option value="km">Kilometer (km)</option>
+                                        <option value="inch">Inch (in)</option>
+                                        <option value="feet">Foot (ft)</option>
+                                        <option value="yard">Yard (yd)</option>
+                                        <option value="mile">Mile (mi)</option>
+                                    </select>
+                                </div>
+                                <div class="dhtDrop" style="display: flex;">
+                                    <p>Convert Celsius to:      </p>
+                                    <select name="unit" id="unit" class="drop">
+                                        <option value="celsius">Celsius</option>
+                                        <option value="kelvin">Kelvin</option>
+                                        <option value="fahrenheit">Fahrenheit</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="bar-container">
-                            <div id="temperature-bar" class="bar temperature-bar"></div>
+            
+                        <!-- DHT22 Sensor Readings -->
+                        <div class="dht22">
+                            <div class="cont">
+                                <div class="temp">                            
+                                    <p id="temperature">Temperature: --</p>
+                                </div>
+                                <div class="bar-container">
+                                    <div id="temperature-bar" class="bar temperature-bar"></div>
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <p id="humidity">Humidity: --</p>
+                                <div class="bar-container">
+                                    <div id="humidity-bar" class="bar humidity-bar"></div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="cont">
-                        <p id="humidity">Humidity: --</p>
-                        <div class="bar-container">
-                            <div id="humidity-bar" class="bar humidity-bar"></div>
-                        </div>
-                    </div>
+                    </div>            
                 </div>
             </div>
+            
+            
+            
 
             <!-- Historical Line Chart -->
             <div class="line-chart">
                 <canvas id="distanceChart" style="margin: 20px;"></canvas>
                 <p class="descrption" style="text-align: center;"><span style="font-weight: bold;">Figure 1:</span>This graph displays the sensor readings from the two HC-SR04 over the past 5 minutes.</p>
-            </div>
-
-            <div class="notifwrapper">
-                <div id="sensor1" class="notification-distance">
-                    <img id="buzzerImage1" src="../../../static/assets/images/buzzer_off.png" class="buzzer">
-                    <span class="message">Distance is safe</span>
-                </div>
-    
-                <div id="sensor2" class="notification-distance">
-                    <img id="buzzerImage2" src="../../../static/assets/images/buzzer_off.png" class="buzzer">
-                    <span class="message">Distance is safe</span>
-                </div>
-            </div>
-            
+            </div>          
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         </div>
     </div>

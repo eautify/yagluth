@@ -13,14 +13,7 @@ body {
     font-family: "Helvetica", sans-serif;   
     background-color: #EEEEEE;
     color: #0a0a0a;
-    margin: 0;
     overflow-x: hidden; /* This prevents the horizontal scroll bar */
-}
-
-
-.main-panel {
-    padding: 3%;
-    width: 85%;
 }
 
 li {
@@ -35,9 +28,26 @@ li {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #e4e4e4;
+    text-align: center;
 }
 
 .activity-page h1 {
-    color: #333;
     margin-bottom: 20px;
+}
+
+.actBody{    
+    margin: 0 auto;
+    width: 95%;
+    background-color: #dbdbdb;
+    padding-bottom: 30px;
+}
+
+.actTitle{
+    background-color: #5c5c5c;
+    color: #f9f9f9;
+    padding: 1.5rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100; /* Ensures it stays above other content */
 }
