@@ -40,6 +40,8 @@ li {
     width: 95%;
     background-color: #dbdbdb;
     padding-bottom: 30px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .actTitle{
@@ -50,4 +52,44 @@ li {
     position: sticky;
     top: 0;
     z-index: 100; /* Ensures it stays above other content */
+}
+
+.email{
+    margin: 20px auto;
+    text-align: center;
+}
+
+.emailAddress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.emailAddress input[type="email"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #a2a3a4;
+    text-align: center;
+}
+
+.emailAddress button {
+    padding: 10px 20px;
+    background-color: #1aaab2;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.emailAddress button:hover {
+    background-color: #117c81;
+}
+
+::placeholder{
+    color: #fff;
 }

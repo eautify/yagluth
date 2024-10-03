@@ -52,44 +52,7 @@
     padding: 20px;
 }
 
-.email{
-    margin: 20px auto;
-}
 
-.emailAddress {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.emailAddress input[type="email"] {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #a2a3a4;
-    text-align: center;
-}
-
-.emailAddress button {
-    padding: 10px 20px;
-    background-color: #1aaab2;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.emailAddress button:hover {
-    background-color: #117c81;
-}
-
-::placeholder{
-    color: #fff;
-}
 
 .meter-container {
     width: 300px;

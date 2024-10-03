@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity #5 - Yagluth's</title>
+    <link rel="stylesheet" href="../../../static/css/main.css">
+    <link rel="stylesheet" href="../../../static/css/nav.css">
+    <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">
+    <script src="../../../static/js/nav.js"></script>
+    <link rel="stylesheet" href="../../../static/css/actlist/act5.css">
+    <script src="../../../static/js/act5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../../static/js/act5-charts.js"></script>
+
+
+    
+</head>
+
+
+<body>
+    <nav class="navbar">
+        <a href="../../index.html" id="logo">YAGLUTH's</a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li>
+                <a class="dropdown-arrow" onclick="toggleSubMenu()" class="active">Activity lists</a>
+                <ul class="sub-menus">
+                    <li><a href="activity1.html">Activity #1</a></li>
+                    <li><a href="activity2.html">Activity #2</a></li>
+                    <li><a href="activity3.html">Activity #3</a></li>
+                    <li><a href="activity4.html">Activity #4</a></li>
+                    <li><a href="activity5.html" class="active">Activity #5</a></li>
+                    <li><a href="comingsoon.html">Activity #6</a></li>
+                    <li><a href="comingsoon.html">Activity #7</a></li>
+                    <li><a href="comingsoon.html">Activity #8</a></li>
+                    <li><a href="comingsoon.html">Activity #9</a></li>
+                    <li><a href="comingsoon.html">Activity #10</a></li>
+                </ul>
+            </li>
+            <li><a href="../developers.html">Developers</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-panel">
+        <div class="actBody">
+            <div class="actTitle">
+                <h1>Sound and Raindrop Sensor</h1>
+                <p>This activity involves monitoring sound levels using a sound sensor and detecting moisture with a raindrop sensor.</p>
+            </div>
+            <div class="actContent">
+                <div class="panel Sound">
+                    <h2 style="color: #595959; margin: 10px auto;">Sound Sensor (KY-037)</h2>
+                    <div class="split">
+                        <div class="values">
+    
+                            <div class="meter-container">
+                                <canvas id="semicircleMeter"></canvas>
+                            </div>                    
+                            <h2 class="holder soundAnalogValue">--</h2>
+                            <h3 class="holder soundDescription">--</h3>
+                        </div>
+                        <div id="descriptions">
+                            <h4 style="color: #00bf63;">Very Quiet (0 - 30 dB):</h4>
+                            <p>Minimal ambient sound, indicating a calm environment.</p>
+                            <br>
+                            <h4 style="color: #00bf63;">Quiet (31 - 50 dB):</h4>
+                            <p>Low-level sounds, such as soft music or distant conversations.</p>
+                            <br>
+                            <h4 style="color: #ffbd59;">Moderate (51 - 70 dB):</h4>
+                            <p>Noticeable sounds, like normal conversations or background noise.</p>
+                            <br>
+                            <h4 style="color: #ff5757;">Loud (71 - 90 dB):</h4>
+                            <p>High sound intensity, such as traffic noise or loud music.</p>
+                            <br>
+                            <h4 style="color: #ff5757;">Very Loud (91 - 120 dB):</h4>
+                            <p>Extremely loud noise, like shouting or heavy machinery, indicating a critical level.</p>
+                        </div>
+                        
+
+                    </div>
+                    <div class="displayChart">
+                        <canvas class="sound Chart"></canvas>
+                        <p><span style="font-weight: bold;">Figure 1:</span>  This graph displays the sound readings from the KY-037 Sound Sensor over the past minute.</p>
+                    </div>
+                </div>
+
+                <div class="panel Raindrop">
+                    <h2 style="color: #595959; margin: 10px auto;">Raindrop Sensor (YL-83)</h2>
+                    <div class="split">
+                        <div class="values">
+                            <div class="meter-container">
+                                <canvas id="semicircleMeter"></canvas>
+                            </div>                    
+                            <h2 class="holder soundAnalogValue">--</h2>
+                            <h3 class="holder soundDescription">--</h3>
+                        </div>     
+                        <div id="descriptions">
+                            <h4 style="color: #00bf63;">No Rain (0 - 20):</h4>
+                            <p>The sensor is dry, indicating no significant rain.</p>
+                            <br>
+                            <h4 style="color: #00bf63;">Light Rain (21 - 40):</h4>
+                            <p>A few raindrops detected, indicating a light drizzle.</p>
+                            <br>
+                            <h4 style="color: #ffbd59;">Moderate Rain (41 - 60):</h4>
+                            <p>Consistent raindrops, suggesting moderate rainfall.</p>
+                            <br>
+                            <h4 style="color: #ff5757;">Heavy Rain (61 - 80):</h4>
+                            <p>Significant rainfall, indicating a heavy downpour.</p>
+                            <br>
+                            <h4 style="color: #ff5757;">Very Heavy Rain (81 - 100):</h4>
+                            <p>The sensor is nearly fully wet, indicating torrential downpour.</p>
+                        </div>
+                                        
+
+
+                    </div>
+                    <div class="displayChart">
+                        <canvas class="sound Chart"></canvas>
+                        <p><span style="font-weight: bold;">Figure 2:</span>  This graph displays the sound readings from the YL-83 Raindrop Sensor over the past minute.</p>
+                    </div>
+                </div>
+
+                
+
+                <div class="email">                    
+                    <label for="email">Enter your email to receive notification: </label>        
+                    <div class="emailAddress">                
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
+                        <button type="submit" onclick="validateEmail()">Submit</button>
+                    </div>
+                </div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+.actContent{
+    background-color: #eeeeee;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.panel{
+    width: 80%;
+    margin: 20px auto;
+    padding: 30px;
+    border-bottom: #595959 1px solid;
+}
+
+.split {
+    display: flex;
+    align-items: center;
+}
+.values{
+    width: 70%;
+}
+
+#descriptions {
+    width: 30%;
+}
+
+.holder{
+    color: white;
+    width: 80%;
+    padding: 10px;
+    border-radius: 3px;
+    margin: 5px auto;
+}
+
+.holder.soundAnalogValue{
+    background-color: #595959;
+    margin-bottom: 2px;
+}
+
+.holder.soundDescription{
+    background-color: #00bf63;
+}
