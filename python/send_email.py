@@ -8,8 +8,8 @@ class EmailClass:
     def __init__(self):
         # Email configuration
         self.email_config = {
-            'sender': '2021-200255@rtu.edu.ph',
-            'app_password': 'lyts pxfq zibc ifdh',  # Use app password instead
+            'sender': 'dr.dravensmith@gmail.com',
+            'app_password': 'qfqw fkyc putk itya',  # Use app password instead
             'smtp_server': 'smtp.gmail.com',
             'smtp_port': 587
         }
@@ -32,7 +32,7 @@ class EmailClass:
             print(f"Failed to retrieve email recipients: {e}")
         return recipients
 
-    def send_email(self, gas_value, vibration_state):
+    def send_email(self, sound_val, rain_val):
         try:
             recipients = self.get_recipients()  # Get recipients from the database
 
@@ -44,13 +44,13 @@ class EmailClass:
             msg = MIMEMultipart()
             msg['From'] = self.email_config['sender']
             msg['To'] = ', '.join(recipients)  # Join the list of recipients
-            msg['Subject'] = 'Alert! - Gas and Vibration'
+            msg['Subject'] = 'Alert! - Activity #5'
 
             # Include the gas and vibration data in the email content
-            body = f"Alert! - Gas and Vibration detected!\n"
+            body = f"Alert! - High Sound Intensity and Rain Detected!\n"
             body += f"\n"
-            body += f"Gas Value: {gas_value}\n"
-            body += f"Vibration State: {vibration_state}\n"
+            body += f"Sound intensity reaches: {sound_val} dB\n"
+            body += f"Rain intensity reaches: {rain_val}%\n"
             body += f"Timestamp: {datetime.now().strftime('%m-%d-%Y %I:%M:%S %p')}.\n"
 
             msg.attach(MIMEText(body))
