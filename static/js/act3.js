@@ -1,113 +1,66 @@
-$(document).ready(function() {
-    fetchMotionData();
-    fetchSensorData(); // Fetch sensor data on page load
-    setInterval(fetchMotionData, 3000); // Refresh motion data every 3 seconds
-    setInterval(fetchSensorData, 500); // Refresh sensor data every 0.5 seconds
-});
+let temperature;
+let motionDetected;
+let emailStatus;
+let previousWarningState = false; // To track the previous warning state
 
-function fetchMotionData() {
-    $.ajax({
-        url: '/history-motion',
-        method: 'GET',
-        success: function(data) {
-            const labels = [];
-            const motionData = [];
-
-            // Process the fetched data
-            data.forEach(item => {
-                labels.push(item.date + ' ' + item.time);
-                motionData.push(item.motion === "Motion Detected!" ? 1 : 0); // 1 for motion, 0 for no motion
-            });
-
-            // Create the chart
-            createMotionChart(labels, motionData);
-        },
-        error: function(error) {
-            console.error('Error fetching motion data:', error);
+async function updateValueAct3() {    
+    try {
+        const response = await fetch('/data');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    });
+
+        const data = await response.json();
+
+        // Store the data into variables
+        temperature = data.Temperature;
+        motionDetected = data.Motion;
+        emailStatus = data.Email;
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        
+        temperature = 'NaN';
+        motionDetected = 'NaN';
+        emailStatus= 'Nan';
+    }
+
+    const tempStatus = document.getElementById('temperature');
+    const motionStatusElement = document.getElementById('motion'); // Renamed to avoid conflict
+
+    // Update temperature value
+    tempStatus.textContent = `${temperature} °C`;
+
+    // Update motion status
+    motionStatusElement.textContent = motionDetected;
+
+    // Change temperature text color based on the value
+    if (temperature >= 30) {
+        tempStatus.style.color = '#ffae9c'; // Orange for high temperature
+    } else {
+        tempStatus.style.color = '#FFF'; // Default color (white)
+    }
+
+    // Change motion status color based on motion detection
+    if (motionDetected == true) {
+        motionStatusElement.style.color = '#ffae9c'; // Orange if motion detected
+        motionStatusElement.textContent = 'Activated'
+    } else if (motionDetected == false){
+        motionStatusElement.style.color = '#FFF'; // Default color (white)
+        motionStatusElement.textContent = 'Deactivated'
+    } else {
+        motionStatusElement.textContent = 'Out of Range'
+        motionStatusElement.style.color = '#FFF'; // Default color (white)
+    }
+
+
+    // Show popup if emailStatus is true and it's a new event
+    if (emailStatus && !previousWarningState) {
+        showPopup();
+    }
+
+    // Update the previous warning state
+    previousWarningState = emailStatus;
 }
 
-
-function fetchSensorData() {
-    $.ajax({
-        url: '/data',
-        method: 'GET',
-        success: function(data) {
-            // Update Temperature
-            $('.result.Temperature').text(data.temperature !== null ? data.temperature + ' °C' : '--');
-            
-            // Update Humidity
-            $('.result.Humidity').text(data.humidity !== null ? data.humidity + ' %' : '--');
-            
-            // Update Motion State
-            $('.result.Motion').text(data.motion ? 'Motion Detected!' : 'No Motion');
-            
-            // Update Buzzer State using if...else
-            const buzzerIcon = $('.buzzerIcon');
-            if (data.motion) {
-                $('.buzzerText').text('Buzzer is active');          
-                buzzerIcon.attr('src', '../../../static/assets/images/buzzer_on.png');
-                $('.emailNotif').show(); // Show the div when motion is detected
-            } else {
-                $('.buzzerText').text('Buzzer inactive');
-                buzzerIcon.attr('src', '../../../static/assets/images/buzzer_off.png');
-                $('.emailNotif').hide(); // Hide the div when no motion is detected
-
-            }
-        },
-        error: function(error) {
-            console.error('Error fetching sensor data:', error);
-        }
-    });
-}
-
-
-
-
-function createMotionChart(labels, motionData) {
-    const ctx = document.getElementById('motionChart').getContext('2d');
-    const motionChart = new Chart(ctx, {
-        type: 'line', // Use 'line' type for stepped chart
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Motion State',
-                data: motionData,
-                fill: false, // Disable fill
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2,
-                stepped: true // Enable stepped line
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Motion State'
-                    },
-                    ticks: {
-                        // Set fixed labels for the Y-axis
-                        callback: function(value) {
-                            if (value === 1) return 'Motion Detected!';
-                            if (value === 0) return 'No Motion';
-                        },
-                        // Ensure only two ticks appear
-                        autoSkip: false,
-                        maxTicksLimit: 2
-                    },
-                    min: 0,
-                    max: 1
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Time'
-                    }
-                }
-            }
-        }
-    });
-}
+setInterval(updateValueAct3, 500);

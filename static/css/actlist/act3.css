@@ -1,70 +1,74 @@
-.act3Content{
-    display: flex;
-    align-items: center;
+
+
+.mocamL {
+    width: 40%;
+}
+
+.mocamR {
+    width: 60%;
+    padding: 10px;
+}
+
+.contenter{
     justify-content: center;
 }
 
-
-
-.act3Content, .gallery-container, .line-chart{  
-    /* background-color: azure; */
-    padding: 15px;
-    border-radius: 10px;
-    margin: 20px;
-}
-
-/* Style buttons */
-.subLeft button {
-    margin:  0 10px;
-    height: 100%;
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    padding: 12px 16px; /* Some padding */
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
-}
-  
-/* Darker background on mouse-over */
-.btnGallery:hover {
-    background-color: #fdfdfd;
-
-}
-
-.panel {
+.sensorDisplay{
     width: 50%;
-    padding: 10px;
+    background-color: #5c5c5c;
+    color: #fff;
+    text-align: center;
+    padding: 15px 30px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.sensorDisplay p{
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+}
+
+.sensorDisplay h2{
+    margin-top: 10px;
+}
+
+.description{
+    margin: 20px auto;
+    text-align: center;
+}
+.statusBar{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: center; /* Vertical centering */
+    justify-content: space-between; /* Spaces out the #motionStatus and #buzzer */
+    height: 40px; /* Ensures full height is used for centering */
+    gap: 5px;
 }
 
-.displayDetection {
-    padding: 10px;
-    align-items: center;
-}
-
-.displayDetection h3 {
-    padding: 10px;
-}
-
-.cameraDisplay img{
+#captured {
     width: 100%;
     object-fit: cover;
-    overflow: hidden;
-    border-radius: 5px;
+    border: 3px solid #5c5c5c;
+    box-sizing: border-box;
+}
+
+
+#motionStatus {
+    background-color: #5c5c5c;
+    color: #fff;
+    text-align: center;
+    width: 100%; /* Ensure it takes full width of its flex space */
+    padding: 10px; /* Optional: Adds some padding around the text */
+}
+
+#buzzer {
+    object-fit: cover;
+    height: 40px;
+    background-color: #5c5c5c;
+}
+
+#subStatus {
+    text-align: center;
     margin: 10px;
-}
-
-.panel.Right {
-    justify-content: center;
-}
-
-.result {
-    padding: 5px;
-    width: 300px;
-    background-color: rgb(86, 86, 86);
-    color: white;
-    margin: 5px 0;
 }
 
 .emailNotif{
@@ -72,48 +76,5 @@
     justify-content: space-evenly;
     align-items: center;
     width: 250px;
-    margin: 30px;
-}
-
-.temphumid{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-
-.result.Temperature, .result.Humidity{
-    width: 130px;
-    margin: 0;
-}
-
-input[type=text], select {
-  width: 250px;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit] {
-    width: 250px;
-    background-color: #b3b3b3;
-    color: white;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-input[type=submit]:hover {
-    background-color: #a0a0a0;
-}
-
-.una{
-    background-color: #fdfdfd;
-    padding: 20px;
-    margin: 5px;
-    width: 100%;
-    border-radius: 5px;
+    margin: 0 auto;
 }

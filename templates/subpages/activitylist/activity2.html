@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activity #2 - Yagluth's</title>
     <link rel="stylesheet" href="../../../static/css/main.css">
-    <link rel="stylesheet" href="../../../static/css/actlist/act2.css">
     <link rel="stylesheet" href="../../../static/css/actlist/act1.css">
+    <link rel="stylesheet" href="../../../static/css/actlist/act2.css">
     <link rel="stylesheet" href="../../../static/css/nav.css">
+    <script src="../../../static/js/main.js"></script>
     <script src="../../../static/js/nav.js"></script>
     <script src="../../../static/js/act1.js"></script>
     <script src="../../../static/js/act2.js"></script>
     <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Raphael and justgage (for gauge) -->
+    <script src="gauge/raphael.min.js"></script>
+    <script src="gauge/justgage.js"></script>
 </head>
 
 
@@ -35,11 +40,6 @@
                     <li><a href="activity3.html">Activity #3</a></li>
                     <li><a href="activity4.html">Activity #4</a></li>
                     <li><a href="activity5.html">Activity #5</a></li>
-                    <li><a href="comingsoon.html">Activity #6</a></li>
-                    <li><a href="comingsoon.html">Activity #7</a></li>
-                    <li><a href="comingsoon.html">Activity #8</a></li>
-                    <li><a href="comingsoon.html">Activity #9</a></li>
-                    <li><a href="comingsoon.html">Activity #10</a></li>
                 </ul>
             </li>
             <li><a href="../developers.html">Developers</a></li>
@@ -51,104 +51,264 @@
                 <h1>Distance Sensor</h1>
                 <p>This activity involves using an ultrasonic sensor to measure and display distance readings.</p>
             </div>
-            <div class="live-readings">
-                <h2 class="title-center" style="text-align: center;">Current Readings</h2>
-                
-                <div class="contentWrap">
-                    <div class="distanceWrapper">
-                        <div class="distanceReadings">
-                            <div class="distanceBoard"> 
-                                <div class="distances">                           
-                                    <!-- Distance 1 -->
-                                    <div id="distance1" class="readings card">
-                                        <p class="distance-label">Distance #1:</p>
-                                        <p style="margin: 10px;" class="values" id="distanceSensor1">--</p>
-                                        <div id="sensor1" class="notification-distance">
-                                            <img id="buzzerImage1" src="../../../static/assets/images/buzzer_off.png" class="buzzer">
-                                            <span class="messageDistance">Distance is safe</span>
+
+            <div class="actContent">
+                <div class="panel Distance">
+                    <h2 id="subTitle">Distance Sensor (HC-SR04)</h2>
+                    <div class="split">
+                        <div class="left">
+                            <div class="split">
+                                <div class="left Distance">
+                                    <div id="distanceGauge1" class="gauge gDistance"></div>
+                                    <h2 class="holderVal distanceValue1">--</h2>
+                                    <h3 class="holderDesc distanceDescription1">--</h3>
+                                </div>
+                                <div class="right Distance">
+                                    <div id="distanceGauge2" class="gauge gDistance"></div>
+                                    <h2 class="holderVal distanceValue2">--</h2>
+                                    <h3 class="holderDesc distanceDescription2">--</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <select name="distance" class="selector" id="unit-distance" class="drop">
+                                <option value="cm">Centimeter (cm)</option>
+                                <option value="mm">Millimeter (mm)</option>
+                                <option value="meter">Meter (m)</option>
+                                <option value="km">Kilometer (km)</option>
+                                <option value="inch">Inch (in)</option>
+                                <option value="feet">Foot (ft)</option>
+                                <option value="yard">Yard (yd)</option>
+                                <option value="mile">Mile (mi)</option>
+                            </select>
+                            <div class="distanceDescription">
+                                <div id="cm" style="display: block;">
+                                    <h4 style="color: #FF4500;">Very Close (0 cm - 10 cm):</h4>
+                                    <p>Object is extremely near.</p>
+                                    <br>
+                                    <h4 style="color: #FFD700;">Close (11 cm - 50 cm):</h4>
+                                    <p>Object is within reachable distance.</p>
+                                    <br>
+                                    <h4 style="color: #00BFFF;">Moderate (51 cm - 100 cm):</h4>
+                                    <p>Object is at a comfortable distance.</p>
+                                    <br>
+                                    <h4 style="color: #004ddd;">Far (101 cm and above):</h4>
+                                    <p>Object is far away.</p>
+                                </div>
+                                <div id="mm" style="display: none;">
+                                    <h4 style="color: #FF4500;">Very Close (0 mm - 100 mm):</h4>
+                                    <p>Object is extremely near.</p>
+                                    <br>
+                                    <h4 style="color: #FFD700;">Close (101 mm - 500 mm):</h4>
+                                    <p>Object is within reachable distance.</p>
+                                    <br>
+                                    <h4 style="color: #7FFFD4;">Moderate (501 mm - 1000 mm):</h4>
+                                    <p>Object is at a comfortable distance.</p>
+                                    <br>
+                                    <h4 style="color: #00BFFF;">Far (1001 mm and above):</h4>
+                                    <p>Object is far away.</p>
+                                </div>
+                                <div id="m" style="display: none;">
+                                    <h4 style="color: #FF4500;">Very Close (0 m - 1 m):</h4>
+                                    <p>Object is extremely near.</p>
+                                    <br>
+                                    <h4 style="color: #FFD700;">Close (1.1 m - 5 m):</h4>
+                                    <p>Object is within reachable distance.</p>
+                                    <br>
+                                    <h4 style="color: #7FFFD4;">Moderate (5.1 m - 10 m):</h4>
+                                    <p>Object is at a comfortable distance.</p>
+                                    <br>
+                                    <h4 style="color: #00BFFF;">Far (10.1 m and above):</h4>
+                                    <p>Object is far away.</p>
+                                </div>
+                                <div id="km" style="display: none;">
+                                    <h4 style="color: #FF4500;">Very Close (0 km - 0.001 km):</h4>
+                                    <p>Object is extremely near.</p>
+                                    <br>
+                                    <h4 style="color: #FFD700;">Close (0.001 km - 0.05 km):</h4>
+                                    <p>Object is within reachable distance.</p>
+                                    <br>
+                                    <h4 style="color: #7FFFD4;">Moderate (0.051 km - 0.1 km):</h4>
+                                    <p>Object is at a comfortable distance.</p>
+                                    <br>
+                                    <h4 style="color: #00BFFF;">Far (0.101 km and above):</h4>
+                                    <p>Object is far away.</p>
+                                </div>
+                                <div id="in" style="display: none;">
+                                    <h4 style="color: #FF4500;">Very Close (0 in - 4 in):</h4>
+                                    <p>Object is extremely near.</p>
+                                    <br>
+                                    <h4 style="color: #FFD700;">Close (5 in - 20 in):</h4>
+                                    <p>Object is within reachable distance.</p>
+                                    <br>
+                                    <h4 style="color: #7FFFD4;">Moderate (21 in - 40 in):</h4>
+                                    <p>Object is at a comfortable distance.</p>
+                                    <br>
+                                    <h4 style="color: #00BFFF;">Far (41 in and above):</h4>
+                                    <p>Object is far away.</p>
+                                </div>
+                                <div id="ft" style="display: none;">
+                                    <h4 style="color: #FF4500;">Very Close (0 ft - 1 ft):</h4>
+                                    <p>Object is extremely near.</p>
+                                    <br>
+                                    <h4 style="color: #FFD700;">Close (1.1 ft - 5 ft):</h4>
+                                    <p>Object is within reachable distance.</p>
+                                    <br>
+                                    <h4 style="color: #7FFFD4;">Moderate (5.1 ft - 10 ft):</h4>
+                                    <p>Object is at a comfortable distance.</p>
+                                    <br>
+                                    <h4 style="color: #00BFFF;">Far (10.1 ft and above):</h4>
+                                    <p>Object is far away.</p>
+                                </div>
+                                <div id="yd" style="display: none;">
+                                    <h4 style="color: #FF4500;">Very Close (0 yd - 1 yd):</h4>
+                                    <p>Object is extremely near.</p>
+                                    <br>
+                                    <h4 style="color: #FFD700;">Close (1.1 yd - 5 yd):</h4>
+                                    <p>Object is within reachable distance.</p>
+                                    <br>
+                                    <h4 style="color: #7FFFD4;">Moderate (5.1 yd - 10 yd):</h4>
+                                    <p>Object is at a comfortable distance.</p>
+                                    <br>
+                                    <h4 style="color: #00BFFF;">Far (10.1 yd and above):</h4>
+                                    <p>Object is far away.</p>
+                                </div>
+                                <div id="mi" style="display: none;">
+                                    <h4 style="color: #FF4500;">Very Close (0 mi - 0.001 mi):</h4>
+                                    <p>Object is extremely near.</p>
+                                    <br>
+                                    <h4 style="color: #FFD700;">Close (0.001 mi - 0.03 mi):</h4>
+                                    <p>Object is within reachable distance.</p>
+                                    <br>
+                                    <h4 style="color: #7FFFD4;">Moderate (0.031 mi - 0.06 mi):</h4>
+                                    <p>Object is at a comfortable distance.</p>
+                                    <br>
+                                    <h4 style="color: #00BFFF;">Far (0.061 mi and above):</h4>
+                                    <p>Object is far away.</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                                
+                <div class="panel Chart">
+                    <h2 id="subTitle">Distance Chart</h2>
+                    <div class="displayChart">
+                        <canvas id="distanceChart"></canvas>
+                        <p><strong>Figure 1:</strong> This graph illustrates the distance sensor measurements over the past minute.</p>
+                    </div>
+                </div>
+
+                <div class="panel Temperature">
+                    <h2 id="subTitle">Temperature (DHT22)</h2>
+                    <div class="split">
+                        <div class="left">                            
+                            <div id="tempGauge" class="gauge"></div>
+                            <h2 class="holderVal tempValue">--</h2>
+                            <h3 class="holderDesc tempDescription">--</h3>
+
+
+                        </div>
+                        <div class="right">
+                            <select name="temperature" id="idTemp" class="selector">
+                                <option value="celcius">Celcius</option>
+                                <option value="kelvin">Kelvin</option>
+                                <option value="fahrenheit">Fahrenheit</option>
+                            </select>
+                            <div id="celcius" style="display: block;">
+                                <h4 style="color: #00BFFF;">Cold (0°C - 10°C):</h4>
+                                <p>Cold, wear warm clothes.</p>
+                                <br>
+                                <h4 style="color: #009aa5;">Cool (11°C - 20°C):</h4>
+                                <p>Light outerwear needed.</p>
+                                <br>
+                                <h4 style="color: #ffc400;">Warm (21°C - 30°C):</h4>
+                                <p>Comfortable, ideal weather.</p>
+                                <br>
+                                <h4 style="color: #FF4500;">Hot (31°C and above):</h4>
+                                <p>Avoid heat exposure.</p>
+                            </div>
+
+                            <div id="fahrenheit" style="display: none;">
+                                <h4 style="color: #00BFFF;">Cold (32°F - 50°F):</h4>
+                                <p>Cold, wear warm clothes.</p>
+                                <br>
+                                <h4 style="color: #009aa5;">Cool (51°F - 68°F):</h4>
+                                <p>Light outerwear needed.</p>
+                                <br>
+                                <h4 style="color: #ffc400;">Warm (69°F - 86°F):</h4>
+                                <p>Comfortable, ideal weather.</p>
+                                <br>
+                                <h4 style="color: #FF4500;">Hot (87°F and above):</h4>
+                                <p>Avoid heat exposure.</p>
+                            </div>
+
+                            <div id="kelvin" style="display: none;">
+                                <h4 style="color: #00BFFF;">Cold (273K - 283K):</h4>
+                                <p>Cold, wear warm clothes.</p>
+                                <br>
+                                <h4 style="color: #009aa5;">Cool (284K - 293K):</h4>
+                                <p>Light outerwear needed.</p>
+                                <br>
+                                <h4 style="color: #ffc400;">Warm (294K - 303K):</h4>
+                                <p>Comfortable, ideal weather.</p>
+                                <br>
+                                <h4 style="color: #FF4500;">Hot (304K and above):</h4>
+                                <p>Avoid heat exposure.</p>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel Humidity">
+                    <h2 id="subTitle">Humidity (DHT22)</h2>
+                    <div class="split">
+                        <div class="left">                            
+                            <div id="humidGauge" class="gauge"></div>
+                            <h2 class="holderVal humidValue">--</h2>
+                            <h3 class="holderDesc humidDescription">--</h3>       
+                        </div>
+
+                        <div class="right">
+                            <h3 id="idHumid" class="selector">Humidity</h3>
+                            <h4 style="color: #00BFFF;">Dry (0% - 30%):</h4>
+                            <p>Very low moisture.</p>
+                            <br>
+                            <h4 style="color: #009aa5;">Comfortable (31% - 50%):</h4>
+                            <p>Ideal moisture level.</p>
+                            <br>
+                            <h4 style="color: #FFD700;">Humid (51% - 70%):</h4>
+                            <p>Noticeable moisture in the air.</p>
+                            <br>
+                            <h4 style="color: #FF6347;">Very Humid (71% and above):</h4>
+                            <p>Sticky and heavy air.</p>
+                        </div>
     
-                                        </div>
-                                    </div>
-                
-                                    <!-- Distance 2 -->
-                                    <div id="distance2" class="readings card">
-                                        <p class="distance-label">Distance #2:</p>
-                                        <p style="margin: 10px;" class="values" id="distanceSensor2">--</p>
-                                        <div id="sensor2" class="notification-distance">
-                                            <img id="buzzerImage2" src="../../../static/assets/images/buzzer_off.png" class="buzzer">
-                                            <span class="messageDistance">Distance is safe</span>
-                                        </div>
-                                    </div>                                    
-                                </div>
-                                <div class="legends card">
-                                    <h5>Legends:</h5>
-                                    <p>1cm - 5cm: <span class="legend-level good">Good</span></p>
-                                    <p>6cm - 12cm: <span class="legend-level safe">Safe</span></p>
-                                    <p>> 12cm: <span class="legend-level unsafe">Unsafe</span></p>
-                                </div>
-                                
-                                
-                                
-                            </div>
-            
-                            <!-- Dropdowns for unit selection -->
-                            <div class="dropdown">
-                                <div class="distanceDrop" style="display: flex;">
-                                    <p>Convert distance to: </p>
-                                    <select name="unit-distance" id="unit-distance" class="drop">
-                                        <option value="cm">Centimeter (cm)</option>
-                                        <option value="mm">Millimeter (mm)</option>
-                                        <option value="meter">Meter (m)</option>
-                                        <option value="km">Kilometer (km)</option>
-                                        <option value="inch">Inch (in)</option>
-                                        <option value="feet">Foot (ft)</option>
-                                        <option value="yard">Yard (yd)</option>
-                                        <option value="mile">Mile (mi)</option>
-                                    </select>
-                                </div>
-                                <div class="dhtDrop" style="display: flex;">
-                                    <p>Convert Celsius to:      </p>
-                                    <select name="unit" id="unit" class="drop">
-                                        <option value="celsius">Celsius</option>
-                                        <option value="kelvin">Kelvin</option>
-                                        <option value="fahrenheit">Fahrenheit</option>
-                                    </select>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+
+                <div class="panel email">
+                    <form>
+                        <label for="email">Enter your email to receive notifications:</label>
+                        <div class="emailAddress">
+                            <input type="email" id="email" name="email" placeholder="Enter your email">
+                            <button type="submit" onclick="validateEmail()">Submit</button>
                         </div>
-            
-                        <!-- DHT22 Sensor Readings -->
-                        <div class="dht22">
-                            <div class="cont">
-                                <div class="temp">                            
-                                    <p id="temperature">Temperature: --</p>
-                                </div>
-                                <div class="bar-container">
-                                    <div id="temperature-bar" class="bar temperature-bar"></div>
-                                </div>
-                            </div>
-                            <div class="cont">
-                                <p id="humidity">Humidity: --</p>
-                                <div class="bar-container">
-                                    <div id="humidity-bar" class="bar humidity-bar"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>            
+                    </form>
                 </div>
             </div>
-            
-            
-            
-
-            <!-- Historical Line Chart -->
-            <div class="line-chart">
-                <canvas id="distanceChart" style="margin: 20px;"></canvas>
-                <p class="descrption" style="text-align: center;"><span style="font-weight: bold;">Figure 1:</span>This graph displays the sensor readings from the two HC-SR04 over the past 5 minutes.</p>
-            </div>          
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         </div>
+
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="../../../static/js/act2-charts.js"></script>
 </body>
 </html>

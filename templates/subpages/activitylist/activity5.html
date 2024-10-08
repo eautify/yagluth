@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../../static/css/main.css">
     <link rel="stylesheet" href="../../../static/css/nav.css">
     <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">
+    <script src="../../../static/js/main.js"></script>
     <script src="../../../static/js/nav.js"></script>
     <link rel="stylesheet" href="../../../static/css/actlist/act5.css">
     <script src="../../../static/js/act5.js"></script>
@@ -57,7 +58,10 @@
                     <div class="split">
                         <div class="values">
                             <div id="sound" class="gauge"></div>
-                            <h2 class="holder soundAnalogValue">--</h2>
+                            <div class="soundValues">                                
+                                <h2 class="holderS soundDecibelsValue">--</h2>
+                                <h2 class="holderS soundAnalogValue">--</h2>
+                            </div>
                             <h3 class="holder soundDescription">--</h3>
                         </div>
                         <div id="descriptions">
@@ -65,7 +69,7 @@
                             <p>Low-level sounds, such as soft music or distant conversations.</p>
                             <h4 style="color: #ffbd59;">Moderate (51 - 90 dB):</h4>
                             <p>Noticeable sounds, like normal conversations or background noise.</p>
-                            <h4 style="color: #ff5757;">Very Loud (91 - 120 dB):</h4>
+                            <h4 style="color: #ff5757;">Very Loud (91 - 150 dB):</h4>
                             <p>Extremely loud noise, like shouting or heavy machinery, indicating a critical level.</p>
                         </div>
                     </div>
@@ -82,17 +86,32 @@
                     <div class="split">
                         <div class="values">
                             <div id="rain" class="gauge"></div>
-                            <h2 class="holder rainAnalogValue">--</h2>
+                            <div class="split">                                
+                                <h2 class="holderS rainAnalogValue">--</h2>
+                                <h2 class="holderS rainPercentValue">--</h2>
+                            </div>
                             <h3 class="holder rainDescription">--</h3>
                         </div>
                         <div id="descriptions">
-                            <h4 style="color: #00bf63;">Light Rain (0 - 40):</h4>
+                            <h4 style="color: #00bf63;">No Rain (0):</h4>
+                            <p>No raindrops detected.</p>
+                            
+                            <h4 style="color: #00bf63;">Light Rain (1 - 10):</h4>
                             <p>A few raindrops detected, indicating a light drizzle.</p>
-                            <h4 style="color: #ffbd59;">Moderate Rain (41 - 80):</h4>
+                            
+                            <h4 style="color: #ffbd59;">Moderate Rain (11 - 25):</h4>
                             <p>Consistent raindrops, suggesting moderate rainfall.</p>
-                            <h4 style="color: #ff5757;">Very Heavy Rain (81 - 100):</h4>
+                            
+                            <h4 style="color: #ffbd59;">Heavy Rain (26 - 50):</h4>
+                            <p>Heavy rainfall is detected.</p>
+                            
+                            <h4 style="color: #ff5757;">Intense Rain (51 - 80):</h4>
+                            <p>Intense rainfall detected. Prepare for significant rain.</p>
+                            
+                            <h4 style="color: #ff5757;">Torrential Rain (81 - 100):</h4>
                             <p>The sensor is nearly fully wet, indicating torrential downpour.</p>
                         </div>
+                        
                     </div>
 
                     <div class="displayChart">

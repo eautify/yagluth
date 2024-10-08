@@ -1,235 +1,158 @@
-let temperatureChart, humidityChart;
-let notificationVisible = false; // To track if the notification is currently visible
+// SCRIPT FOR GAUGE
+let temperatureGauge; // Declare gauge variable for sound
+let humidityGauge; // Declare gauge variable for rain
 
-// Function to fetch and update real-time sensor data
-async function fetchSensorData() {
+let temperatureValue;
+let humidityValue;
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    // Initialize JustGage for sound
+    temperatureGauge = new JustGage({
+        id: 'tempGauge',
+        value: temperatureValue,
+        hideValue: true,
+        min: 0,
+        max: 60,
+        pointer: true,
+        gaugeWidthScale: 1,
+        counter: true
+    });
+
+    // Initialize JustGage for rain
+    humidityGauge = new JustGage({
+        id: 'humidGauge',
+        value: humidityValue,
+        hideValue: true,
+        min: 0,
+        max: 100,
+        pointer: true,
+        gaugeWidthScale: 1,
+        counter: true
+    });
+
+});
+
+// CODE FOR DISPLAYING VALUE
+async function updateValueAct1() {
     try {
         const response = await fetch('/data');
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-
-        // Get the selected unit from the dropdown
-        const unit = document.getElementById('unit').value;
-
-        // Convert the temperature based on the selected unit
-        let temperature;
-        switch (unit) {
-            case 'kelvin':
-                temperature = data.temperature + 273.15;
-                temperature = `${temperature.toFixed(2)} K`;
-                break;
-            case 'fahrenheit':
-                temperature = (data.temperature * 9/5) + 32;
-                temperature = `${temperature.toFixed(2)} °F`;
-                break;
-            default: // Celsius
-                temperature = `${data.temperature.toFixed(2)} °C`;
-                break;
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
 
-        // Update readings
-        document.getElementById('temperature').textContent = `Temperature: ${temperature}`;
-        document.getElementById('humidity').textContent = `Humidity: ${data.humidity} %`;
+    const data = await response.json();
 
-        // Update bar meters
-        updateBarMeter('temperature-bar', data.temperature, 0, 40, ['cold', 'hot']); // Example range
-        updateBarMeter('humidity-bar', data.humidity, 0, 100, ['dry', 'wet']); // Example range
-
-        // Check temperature and trigger notification
-        handleTemperatureNotification(data.temperature);
+    // Store the data into variables
+    temperatureValue = data.Temperature;
+    humidityValue = data.Humidity;
 
     } catch (error) {
-        console.error('Error fetching sensor data:', error);
+        console.error('Error fetching data:', error);
+        
+        temperatureValue = 'NaN';
+        humidityValue = 'NaN';
+    } 
+
+    const tempUpdate = document.getElementsByClassName('tempValue')[0];
+    const humidUpdate = document.getElementsByClassName('humidValue')[0];
+
+    const tempDescription = document.getElementsByClassName('tempDescription')[0];
+    const humidDescription = document.getElementsByClassName('humidDescription')[0];
+
+    // Get the selected unit from the dropdown
+    const unit = document.getElementById('idTemp').value;
+
+    // Convert the temperature based on the selected unit
+    let temperature;
+
+    // Get all the div elements
+    const celsiusDiv = document.getElementById('celcius');
+    const kelvinDiv = document.getElementById('kelvin');
+    const fahrenheitDiv = document.getElementById('fahrenheit');
+    
+    // Hide all divs first
+    celsiusDiv.style.display = 'none';
+    kelvinDiv.style.display = 'none';
+    fahrenheitDiv.style.display = 'none';
+
+    switch (unit) {
+        case 'kelvin':
+            temperature = temperatureValue + 273.15;
+            temperature = `${temperature.toFixed(2)} K`; 
+            kelvinDiv.style.display = 'block';      
+            break;
+        case 'fahrenheit':
+            temperature = (temperatureValue * 9/5) + 32;
+            temperature = `${temperature.toFixed(2)} °F`;
+            fahrenheitDiv.style.display = 'block';
+            break;
+        default: // Celsius
+            temperature = `${temperatureValue.toFixed(2)} °C`;     
+            celsiusDiv.style.display = 'block';
+            break;
     }
-}
+    
+    tempUpdate.textContent = temperature;
+    humidUpdate.textContent = humidityValue + ' %';
 
-// Function to update the bar meter's width and color
-function updateBarMeter(barId, value, min, max, colorClasses) {
-    const bar = document.querySelector(`#${barId}`);
-    if (!bar) return;
 
-    const percentage = ((value - min) / (max - min)) * 100;
-    bar.style.width = `${Math.min(Math.max(percentage, 0), 100)}%`; // Ensure percentage is within 0-100%
-
-    // Remove all color classes
-    colorClasses.forEach(colorClass => bar.classList.remove(colorClass));
-
-    // Add appropriate color class based on value
-    if (value < (max - min) / 2) {
-        bar.classList.add(colorClasses[0]);
+    // Change the tempDescription text and style based on the temperature value
+    if (temperatureValue >= 0 && temperatureValue <= 10) {
+        // Cold
+        tempDescription.textContent = 'Cold, wear warm clothes.';
+        tempDescription.style.color = '#00BFFF'; // Text color
+        tempDescription.style.backgroundColor = '#E0F7FF'; // Background color (optional)
+    } else if (temperatureValue >= 11 && temperatureValue <= 20) {
+        // Cool
+        tempDescription.textContent = 'Cool, light outerwear needed.';
+        tempDescription.style.color = '#009aa5'; // Text color
+        tempDescription.style.backgroundColor = '#DFF7F7'; // Background color (optional)
+    } else if (temperatureValue >= 21 && temperatureValue <= 30) {
+        // Warm
+        tempDescription.textContent = 'Warm, comfortable ideal weather.';
+        tempDescription.style.color = '#ffc400'; // Text color
+        tempDescription.style.backgroundColor = '#FFF4D2'; // Background color (optional)
+    } else if (temperatureValue >= 31) {
+        // Hot
+        tempDescription.textContent = 'Hot, avoid heat exposure.';
+        tempDescription.style.color = '#FF4500'; // Text color
+        tempDescription.style.backgroundColor = '#FFE0D6'; // Background color (optional)
     } else {
-        bar.classList.add(colorClasses[1]);
+        // Default in case of invalid temperature
+        tempDescription.textContent = '--';
+        tempDescription.style.color = '#000'; // Default text color
+        tempDescription.style.backgroundColor = '#FFF'; // Default background color
     }
-}
 
-// Function to handle temperature notification
-function handleTemperatureNotification(temperature) {
-    const buzzerImage = document.getElementById('buzzerImage');
-    const message = document.querySelector('.message');
-
-    if (temperature >= 32) {
-        buzzerImage.src = '../../../static/assets/images/buzzer_on.png';
-        message.textContent = 'Temperature is above 32°C!';
+    if (humidityValue >= 0 && humidityValue <= 30) {
+        // Dry
+        humidDescription.textContent = 'Dry, very low moisture.';
+        humidDescription.style.color = '#00BFFF'; // Text color
+        humidDescription.style.backgroundColor = '#E0F7FF'; // Background color (optional)
+    } else if (humidityValue >= 31 && humidityValue <= 50) {
+        // Comfortable
+        humidDescription.textContent = 'Comfortable, ideal moisture level.';
+        humidDescription.style.color = '#009aa5'; // Text color
+        humidDescription.style.backgroundColor = '#DFF7F7'; // Background color (optional)
+    } else if (humidityValue >= 51 && humidityValue <= 70) {
+        // Humid
+        humidDescription.textContent = 'Humid, noticeable moisture in the air.';
+        humidDescription.style.color = '#FFD700'; // Text color
+        humidDescription.style.backgroundColor = '#FFF7E0'; // Background color (optional)
+    } else if (humidityValue >= 71) {
+        // Very Humid
+        humidDescription.textContent = 'Very Humid, sticky and heavy air.';
+        humidDescription.style.color = '#FF6347'; // Text color
+        humidDescription.style.backgroundColor = '#FFE0D6'; // Background color (optional)
     } else {
-        buzzerImage.src = '../../../static/assets/images/buzzer_off.png';
-        message.textContent = 'Temperature is normal';
-    }
-}
-
-// Function to fetch and render historical data charts
-async function fetchAndRenderHistory() {
-    try {
-        const response = await fetch('/history-dht');
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-
-        const labels = data.map(item => item.time); // Time labels
-        const temperatureData = data.map(item => item.temperature);
-        const humidityData = data.map(item => item.humidity);
-
-        // Helper function to find the index of the newest highest value
-        function findNewestHighestIndex(data) {
-            const maxValue = Math.max(...data);
-            return data.lastIndexOf(maxValue);
-        }
-
-        // Helper function to find the index of the newest lowest value
-        function findNewestLowestIndex(data) {
-            const minValue = Math.min(...data);
-            return data.lastIndexOf(minValue);
-        }
-
-        // Find the indices of the highest and lowest temperature points
-        const maxTempIndex = findNewestHighestIndex(temperatureData);
-        const minTempIndex = findNewestLowestIndex(temperatureData);
-
-        // Find the indices of the highest and lowest humidity points
-        const maxHumidityIndex = findNewestHighestIndex(humidityData);
-        const minHumidityIndex = findNewestLowestIndex(humidityData);
-
-        // Update Temperature Chart
-        if (temperatureChart) {
-            temperatureChart.data.labels = labels;
-            temperatureChart.data.datasets[0].data = temperatureData;
-            temperatureChart.data.datasets[0].pointBackgroundColor = temperatureData.map((_, index) => {
-                if (index === maxTempIndex) return 'red'; // Newest highest point
-                if (index === minTempIndex) return 'blue'; // Newest lowest point
-                return 'green'; // Default point color
-            });
-            temperatureChart.data.datasets[0].pointRadius = temperatureData.map((_, index) => {
-                if (index === maxTempIndex || index === minTempIndex) return 7; // Larger radius for highlighted points
-                return 3; // Default point radius
-            });
-            temperatureChart.update();
-        } else {
-            const tempCtx = document.getElementById('temperatureChart').getContext('2d');
-            temperatureChart = new Chart(tempCtx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Temperature (°C)',
-                        data: temperatureData,
-                        borderColor: 'green', // Line color
-                        fill: false,
-                        tension: 0.1,
-                        pointBackgroundColor: temperatureData.map((_, index) => {
-                            if (index === maxTempIndex) return 'red'; // Newest highest point
-                            if (index === minTempIndex) return 'blue'; // Newest lowest point
-                            return 'green'; // Default point color
-                        }),
-                        pointRadius: temperatureData.map((_, index) => {
-                            if (index === maxTempIndex || index === minTempIndex) return 7; // Larger radius for highlighted points
-                            return 3; // Default point radius
-                        })
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Time'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Temperature (°C)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Update Humidity Chart
-        if (humidityChart) {
-            humidityChart.data.labels = labels;
-            humidityChart.data.datasets[0].data = humidityData;
-            humidityChart.data.datasets[0].pointBackgroundColor = humidityData.map((_, index) => {
-                if (index === maxHumidityIndex) return 'red'; // Newest highest point
-                if (index === minHumidityIndex) return 'blue'; // Newest lowest point
-                return 'orange'; // Default point color
-            });
-            humidityChart.data.datasets[0].pointRadius = humidityData.map((_, index) => {
-                if (index === maxHumidityIndex || index === minHumidityIndex) return 7; // Larger radius for highlighted points
-                return 3; // Default point radius
-            });
-            humidityChart.update();
-        } else {
-            const humidityCtx = document.getElementById('humidityChart').getContext('2d');
-            humidityChart = new Chart(humidityCtx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Humidity (%)',
-                        data: humidityData,
-                        borderColor: 'orange', // Line color
-                        fill: false,
-                        tension: 0.1,
-                        pointBackgroundColor: humidityData.map((_, index) => {
-                            if (index === maxHumidityIndex) return 'red'; // Newest highest point
-                            if (index === minHumidityIndex) return 'blue'; // Newest lowest point
-                            return 'orange'; // Default point color
-                        }),
-                        pointRadius: humidityData.map((_, index) => {
-                            if (index === maxHumidityIndex || index === minHumidityIndex) return 7; // Larger radius for highlighted points
-                            return 3; // Default point radius
-                        })
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Time'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Humidity (%)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-    } catch (error) {
-        console.error('Error fetching historical data:', error);
+        // Default case for invalid humidity
+        humidDescription.textContent = 'Humidity: --';
+        humidDescription.style.color = '#000'; // Default text color
+        humidDescription.style.backgroundColor = '#FFF'; // Default background color
     }
 }
 
 
-// Fetch real-time data every 1 seconds
-setInterval(fetchSensorData, 1000);
 
-// Fetch and refresh historical data charts every 1 seconds
-setInterval(fetchAndRenderHistory, 1000);
 
-// Initial fetch for real-time data and historical data
-fetchSensorData();
-fetchAndRenderHistory();
+setInterval(updateValueAct1, 500);

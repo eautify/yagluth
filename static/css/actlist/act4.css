@@ -13,12 +13,12 @@
     padding: 30px;
 }
 
-.mq2Display{
-    margin-bottom: 10px;
+.left{
+    width: 60%;
 }
 
-.textDisplay, .gaugeDisplay{
-    width: 50%;
+.right{
+    width: 40%;
 }
 
 .panel.Gas, .panel.Vibration{    
@@ -42,12 +42,7 @@
     cursor: pointer;
 }
 
-#gasDescription:hover {
-    filter: brightness(90%);
-  }
-
 #gasLabel{
-    background-color: #e4e4e4;
     border-radius: 5px;
     padding: 20px;
 }

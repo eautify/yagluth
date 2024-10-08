@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="../../../static/css/main.css">
     <link rel="stylesheet" href="../../../static/css/nav.css">
     <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">
+    <script src="../../../static/js/main.js"></script>
     <script src="../../../static/js/nav.js"></script>
     <link rel="stylesheet" href="../../../static/css/actlist/act4.css">
     <script src="../../../static/js/act4.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../../../static/js/act4-charts.js"></script>
 
-
+    <!-- Raphael and justgage (for gauge) -->
+    <script src="gauge/raphael.min.js"></script>
+    <script src="gauge/justgage.js"></script>
     
 </head>
 
@@ -37,11 +38,6 @@
                     <li><a href="activity3.html">Activity #3</a></li>
                     <li><a href="activity4.html" class="active">Activity #4</a></li>
                     <li><a href="activity5.html">Activity #5</a></li>
-                    <li><a href="comingsoon.html">Activity #6</a></li>
-                    <li><a href="comingsoon.html">Activity #7</a></li>
-                    <li><a href="comingsoon.html">Activity #8</a></li>
-                    <li><a href="comingsoon.html">Activity #9</a></li>
-                    <li><a href="comingsoon.html">Activity #10</a></li>
                 </ul>
             </li>
             <li><a href="../developers.html">Developers</a></li>
@@ -56,43 +52,51 @@
             </div>
             <div class="actContent">
                 <div class="panel Gas">
-                    <div class="mq2Display">
-                        <h2 style="color: #595959; margin: 10px auto;">MQ-2 Gas Sensor</h2>
-
-                        <div class="meter-container">
-                            <canvas id="semicircleMeter"></canvas>
-                        </div>                    
-                        <script src="meter.js"></script>
-                        <h2 id="gasAnalogValue">--</h2>
-                        <h3 id="gasDescription" onclick="hideLabel()">--</h3>
-                    </div>
-                    <div id="gasLabel">
-                        <h4 style="color: #00bf63;">Normal (below 20 ppm):</h4>
-                        <p>Gas concentration is within safe levels.</p>
-                        <br>
-                        <h4 style="color: #ffbd59;">Warning (20 - 60 ppm):</h4>
-                        <p>Gas concentration is approaching a potentially unsafe level.</p>
-                        <br>
-                        <h4 style="color: #ff5757;">Danger (above 60 ppm):</h4>
-                        <p>Gas concentration has reached a critical level and requires immediate action.</p>
-                    </div>
-                    <div class="displayChart">
-                        <canvas id="gasChart"></canvas>
-                        <p><span style="font-weight: bold;">Figure 1:</span>  This graph displays the gas readings from the MQ-2 Gas sensor over the past minute.</p>
+                    <h2 id="subTitle">MQ-2 Gas Sensor</h2>
+                    <div class="split">                        
+                        <div class="left">
+                            <div id="gasGauge" class="gauge"></div>
+                            <h2 id="gasAnalogValue">--</h2>
+                            <h3 id="gasDescription">--</h3>
+                        </div>
+                        <div class="right">
+                            <h4 style="color: #00bf63;">Normal (below 20 ppm):</h4>
+                            <p>Gas concentration is within safe levels.</p>
+                            <br>
+                            <h4 style="color: #ffbd59;">Warning (20 - 60 ppm):</h4>
+                            <p>Gas concentration is approaching a potentially unsafe level.</p>
+                            <br>
+                            <h4 style="color: #ff5757;">Danger (above 60 ppm):</h4>
+                            <p>Gas concentration has reached a critical level and requires immediate action.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="panel Vibration">
-                    <div class="sw420Display">
-                        <h2 style="color: #595959;">SW-420 Vibration Sensor</h3>
-                        <h2 id="vibrationValue">--</h2>
+                    <h2 id="subTitle">SW-420 Vibration Sensor</h2>
+                    <div class="split">                            
+                        <div class="left">
+                            <div id="vibrationGauge" class="gauge"></div>
+                            <h2 id="vibrationValue">--</h2>
+                        </div>
+                        <div class="right">
+                            <h4 style="color: #00bf63;">No Vibration Detected:</h4>
+                            <p>The sensor is not detecting any vibrations or movement, indicating a stable environment.</p>
+                            <br>
+                            <h4 style="color: #ff5757;">Vibration Detected:</h4>
+                            <p>The sensor has detected vibrations, signaling potential motion or disturbances in the environment. Immediate attention may be required to assess the situation.</p>
+                            <br>
+                        </div>
+                        
                     </div>
-                    
-                    <div class="displayChart">
-                        <canvas id="vibrationChart"></canvas>
-                        <p><span style="font-weight: bold;">Figure 2:</span> This graph displays the vibration history.</p>
-                    </div>
+                </div>
 
+                <div class="panel Chart">
+                    <h2 id="subTitle">Gas and Vibration Chart</h2>
+                    <div class="displayChart">
+                        <canvas id="act4Chart"></canvas>
+                        <p><strong>Figure 1:</strong> This graph displays the gas readings from the MQ-2 Gas sensor over the past minute.</p>
+                    </div>
                 </div>
 
                 <div class="email">                    
@@ -107,12 +111,16 @@
                 
             </div>
         </div>
-        <div class="popup" id="popup">
-            <h2>Warning: High Gas Concentration and Vibration Detected</h2>
-            <p>An email notification has been sent.</p>
-            <button class="close-btn" onclick="closePopup()">Close</button>
-        </div>
+    </div>
+    <!-- Popup Notification -->
+    <div class="popup" id="popup">
+        <h2>Warning: High Sound and Rain Intensity Detected</h2>
+        <p>An email notification has been sent.</p>
+        <button class="close-btn" onclick="closePopup()">Close</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="../../../static/js/act4-charts.js"></script>
 </body>
 </html>

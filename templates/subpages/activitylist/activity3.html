@@ -8,11 +8,14 @@
     <link rel="stylesheet" href="../../../static/css/actlist/act3.css">
     <link rel="stylesheet" href="../../../static/css/nav.css">
     <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">
+    <script src="../../../static/js/main.js"></script>
     <script src="../../../static/js/nav.js"></script>
-    <script src="../../../static/js/act3.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../../static/js/act3.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="../../../static/js/act3.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Raphael and justgage (for gauge) -->
+    <script src="gauge/raphael.min.js"></script>
+    <script src="gauge/justgage.js"></script>
     
 </head>
 
@@ -36,104 +39,90 @@
                     <li><a href="activity3.html" class="active">Activity #3</a></li>
                     <li><a href="activity4.html">Activity #4</a></li>
                     <li><a href="activity5.html">Activity #5</a></li>
-                    <li><a href="comingsoon.html">Activity #6</a></li>
-                    <li><a href="comingsoon.html">Activity #7</a></li>
-                    <li><a href="comingsoon.html">Activity #8</a></li>
-                    <li><a href="comingsoon.html">Activity #9</a></li>
-                    <li><a href="comingsoon.html">Activity #10</a></li>
                 </ul>
             </li>
             <li><a href="../developers.html">Developers</a></li>
         </ul>
     </nav>
-    <div class="main-panel">        
+    <div class="main-panel">
         <div class="actBody">
             <div class="actTitle">
                 <h1>Motion Sensor and Camera</h1>
                 <p>This activity involves detecting motion with a PIR sensor and capturing images with a Raspberry Pi Camera.</p>
             </div>
-            <div class="act3Content">
-                <div class="panel Left">
-
-                    <div class="cameraDisplay">
-                        <img id="latest-screenshot" src="" alt="Latest Screenshot">
-                    </div>
+            <div class="actContent">
+                <div class="panel Motion">
                     
-                    <script>
-                    $(document).ready(function() {
-                        function updateScreenshot() {
-                            $.ajax({
-                                url: '/latest_screenshot',
-                                method: 'GET',
-                                success: function(response) {
-                                    if (response.screenshot_url) {
-                                        $('#latest-screenshot').attr('src', response.screenshot_url);
-                                    }
-                                },
-                                error: function() {
-                                    console.log("Failed to load screenshot");
-                                }
-                            });
-                        }
-                    
-                        // Fetch and update the screenshot every 5 seconds
-                        setInterval(updateScreenshot, 1000);
-                    });
-                    </script>
-                    
-
-                    <div class="subLeft">
-                        <h3 class="result Motion">--</h3>
-                        
-                        <div class="result Buzzer" style="display: flex; justify-content: center; align-items: center;">                            
-                            <img src="../../../static/assets/images/buzzer_off.png" class="buzzerIcon" style="height: 50px;">
-                            <h3 class="buzzerText">--</h3>
-                        </div>
-                    </div>                    
-
-                    <div class="emailNotif">                            
-                        <img src="../../../static/assets/images/email.png" class="emailIcon" style="height: 30px;">
-                        <h5 class="emailText">Email has been sent!</h5>
-                    </div>
-                </div>
-                <div class="panel Right">
-                    <div class="una">                        
-                        <div class="temphumid">                        
-                            <div class="displayDetection">
-                                <h3 class="result Temperature">--</h3>
-                                <h5>Temperature</h5>
-                            </div>                        
-                            <div class="displayDetection">
-                                <h3 class="result Humidity">--</h3>
-                                <h5>Humidity</h5>
+                    <h2 id="subTitle">Motion Sensor (HC-SR501)</h2>
+                    <div class="split">
+                        <div class="left mocamL">
+                            <img id="captured" src="../../../static/assets/images/hulicam/motion_20240704-180928.jpg" alt="Motion Sensor">
+                            <div class="split statusBar">
+                                <h3 id="motionStatus">Waiting for motion ...</h3>
+                                <img id="buzzer" src="../../../static/assets/images/buzzer_off.png" alt="">
+                            </div>
+                            <p id="subStatus">Camera and PIR Motion sensor is ready...</p>
+                            <div class="emailNotif">                            
+                                <img src="../../../static/assets/images/email.png" class="emailIcon" style="height: 30px;">
+                                <h5 class="emailText">Email has been sent!</h5>
                             </div>
                         </div>
-                        <div class="displayDetection">
-                            <img src="../../../static/assets/images/3Legend.jpg" class="result Legend"></img>
-                            <h5>Legend</h5>
+                        <div class="right mocamR">
+                            <div class="split contenter">
+                                <div class="left sensorDisplay">
+                                    <p">Temperature:</p>
+                                    <h2 id="temperature">--</h2>
+                                </div>
+                                <div class="right sensorDisplay">
+                                    <p>Motion Sensor:</p>
+                                    <h2 id="motion">--</h2>
+                                </div>
+                            </div>
+                            
+                            <div class="description">
+                                <h4>When Temperature ≥ 38°C:</h4>
+                                <p>The camera captures an image when motion is detected.<p>
+                                <br>
+                                <h4>When Temperature < 38°C:</h4>
+                                <p>Both the camera and motion sensor are deactivated.<p>
+                            </div>
                         </div>
-                        <div class="displayDetection">
-                        </div>
+
                     </div>
-                    <div class="una">                        
-                        <div class="emailAddress">
-                            <label>Enter your email to receive notification: </label>                    
-                            <input type="text" id="email" name="email">
-                            <input type="submit" value="Submit">
-                        </div>
+
+                </div>
+
+                <div class="panel Chart">
+                    <h2 id="subTitle">Motion History Chart</h2>
+                    <div class="displayChart">
+                        <canvas id="distanceChart"></canvas>
+                        <p style="text-align: center;"><strong>Figure 1:</strong>.</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="line-chart" style="background-color: rgb(238, 238, 238);">
-                <canvas id="motionChart" width="400" height="200"></canvas>
-
-                <p class="descrption" style="text-align: center;">
-                    <span style="font-weight: bold;">Figure 1:</span>
-                    This graph displays the motion readings from the two HC-SR501 over the past 3 minutes.
-                </p>
+                <div class="panel email">
+                    <form>
+                        <label for="email">Enter your email to receive notifications:</label>
+                        <div class="emailAddress">
+                            <input type="email" id="email" name="email" placeholder="Enter your email">
+                            <button type="submit" onclick="validateEmail()">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                
             </div>
         </div>
     </div>
+    
+    <!-- Popup Notification -->
+    <div class="popup" id="popup">
+        <h2>Warning: High Sound and Rain Intensity Detected</h2>
+        <p>An email notification has been sent.</p>
+        <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="../../../static/js/act3-charts.js"></script>
 </body>
 </html>

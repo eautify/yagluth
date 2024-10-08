@@ -5,22 +5,16 @@ let motionArray = [];
 let timeArray = Array.from({ length: 60 }, (_, i) => -(i + 1));
 
 // Create the chart
-const ctxDHT = document.getElementById('act4Chart').getContext('2d');
-const dhtChart = new Chart(ctxDHT, {
+const ctxDHT = document.getElementById('distanceChart').getContext('2d');
+const act3Chart = new Chart(ctxDHT, {
     type: 'line',
     data: {
         labels: timeArray,  // Format time for display (newest on the left)
         datasets: [{
-            label: 'MQ-2 Gas Sensor',
+            label: 'HC-SR501',
             data: motionArray,
-            borderColor: '#33ffbd',
-            backgroundColor: 'rgba(51, 255, 189, 0.5)',
-            fill: true
-        },{
-            label: 'SW-420 Vibration Sensor',
-            data: motionArray,
-            borderColor: '#ff5733',
-            backgroundColor: 'rgba(255, 87, 51, 0.5)',
+            borderColor: '#696eff',
+            backgroundColor: 'rgba(105, 110, 255, 0.5)',
             fill: true
         }]
     },

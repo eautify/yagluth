@@ -1,49 +1,13 @@
 let previousWarningState = false; // To track the previous warning state
 // Store the data into variables
-let emailStatus = 0;
-let rainAmount = 0;
-let soundLevel = 0;
+let emailStatus;
+let rainAmount;
+let soundLevel;
 
 let soundGauge; // Declare gauge variable for sound
 let rainGauge; // Declare gauge variable for rain
 
-// Function to show the popup
-function showPopup() {
-    document.getElementById("popup").style.display = "block";
-    popupShown = true;  // Set the flag once the popup is shown
-}
-
-// Function to close the popup and reset the flag
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-    popupShown = false;  // Reset the flag so popup can show again for a new event
-}
-
-function validateEmail() {
-    var email = document.getElementById("email").value;
-    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!emailRegex.test(email)) {
-        alert("Invalid Email Address");
-        return;
-    }
-
-    // Send the email to Flask for saving
-    $.ajax({
-        type: 'POST',
-        url: '/save-email',
-        data: JSON.stringify({ email: email }),
-        contentType: 'application/json',
-        success: function(response) {
-            alert(response.message);
-        },
-        error: function() {
-            alert("Error saving email.");
-        }
-    });
-}
-
-async function fetchData() {
+async function updateValueAct5() {
     try {
         const response = await fetch('/data');
         if (!response.ok) {
@@ -57,65 +21,85 @@ async function fetchData() {
         rainAmount = data.Rain;
         soundLevel = data.Sound;
 
-        // Update displayed values
-        document.getElementsByClassName('holder soundAnalogValue')[0].textContent = soundLevel + ' dB';
-        document.getElementsByClassName('holder rainAnalogValue')[0].textContent = rainAmount + '%';
-
-        // Update sound description and gauge color
-        const soundDescriptionElement = document.querySelector('.holder.soundDescription');
-        if (soundLevel >= 0 && soundLevel <= 50) {
-            soundDescriptionElement.textContent = 'Quiet'; 
-            soundDescriptionElement.style.backgroundColor = '#00bf63'; 
-            soundGauge.config.customSectors[1].color = '#00bf63'; // Green
-        } else if (soundLevel >= 51 && soundLevel <= 90) {
-            soundDescriptionElement.textContent = 'Moderate'; 
-            soundDescriptionElement.style.backgroundColor = '#ffbd59'; 
-            soundGauge.config.customSectors[1].color = '#ffbd59'; // Yellow
-        } else if (soundLevel >= 91 && soundLevel <= 120) {
-            soundDescriptionElement.textContent = 'Very Loud'; 
-            soundDescriptionElement.style.backgroundColor = '#ff5757'; 
-            soundGauge.config.customSectors[1].color = '#ff5757'; // Red
-        } else {
-            soundDescriptionElement.textContent = 'Out of Range'; 
-            soundDescriptionElement.style.backgroundColor = '#cccccc'; 
-            soundGauge.config.customSectors[1].color = '#cccccc'; // Gray
-        }
-
-        // Update rain description and gauge color
-        const rainDescriptionElement = document.querySelector('.holder.rainDescription');
-        if (rainAmount >= 0 && rainAmount <= 40) {
-            rainDescriptionElement.textContent = 'Light Rain'; 
-            rainDescriptionElement.style.backgroundColor = '#00bf63'; 
-            rainGauge.config.customSectors[0].color = '#00bf63'; // Green
-        } else if (rainAmount >= 41 && rainAmount <= 80) {
-            rainDescriptionElement.textContent = 'Moderate Rain'; 
-            rainDescriptionElement.style.backgroundColor = '#ffbd59'; 
-            rainGauge.config.customSectors[1].color = '#ffbd59'; // Yellow
-        } else if (rainAmount >= 81 && rainAmount <= 100) {
-            rainDescriptionElement.textContent = 'Very Heavy Rain'; 
-            rainDescriptionElement.style.backgroundColor = '#ff5757'; 
-            rainGauge.config.customSectors[2].color = '#ff5757'; // Red
-        } else {
-            rainDescriptionElement.textContent = 'Out of Range'; 
-            rainDescriptionElement.style.backgroundColor = '#cccccc'; 
-            rainGauge.config.customSectors[0].color = '#cccccc'; // Gray
-        }
-
-        // Refresh the gauges with updated colors
-        soundGauge.refresh(soundLevel);
-        rainGauge.refresh(rainAmount);
-
-        // Show popup if emailStatus is true and it's a new event
-        if (emailStatus && !previousWarningState) {
-            showPopup();
-        }
-
-        // Update the previous warning state
-        previousWarningState = emailStatus;
-
     } catch (error) {
         console.error('Error fetching data:', error);
+        
+        emailStatus = 'NaN';
+        rainAmount = 'NaN';
+        soundLevel = 'NaN';
     }
+
+    soundpercentage = (soundLevel / 1023) * 100;
+    rainPercentage = (rainAmount / 1023) * 100;
+
+    // Update displayed values
+    document.getElementsByClassName('holderS soundDecibelsValue')[0].textContent = soundLevel + ' dB';
+    document.getElementsByClassName('holderS soundAnalogValue')[0].textContent = soundpercentage.toFixed(2) + ' %';
+
+    document.getElementsByClassName('holderS rainAnalogValue')[0].textContent = rainAmount;
+    document.getElementsByClassName('holderS rainPercentValue')[0].textContent = rainPercentage.toFixed(2) + ' %';
+
+    // Update sound description and gauge color
+    const soundDescriptionElement = document.querySelector('.holder.soundDescription'); // Ensure this class is defined in your HTML
+
+    if (soundLevel >= 0 && soundLevel <= 50) {
+        soundDescriptionElement.textContent = 'Quiet (0 - 50 dB):'; 
+        soundDescriptionElement.style.backgroundColor = '#00bf63'; // Green background
+        soundDescriptionElement.style.color = '#ffffff'; // White text for contrast
+    } else if (soundLevel >= 51 && soundLevel <= 90) {
+        soundDescriptionElement.textContent = 'Moderate (51 - 90 dB):'; 
+        soundDescriptionElement.style.backgroundColor = '#ffbd59'; // Yellow background
+        soundDescriptionElement.style.color = '#ffffff'; // White text for contrast
+    } else if (soundLevel >= 91 && soundLevel <= 150) { // Adjusted upper limit to 150
+        soundDescriptionElement.textContent = 'Very Loud (91 - 150 dB):'; 
+        soundDescriptionElement.style.backgroundColor = '#ff5757'; // Red background
+        soundDescriptionElement.style.color = '#ffffff'; // White text for contrast
+    } else {
+        soundDescriptionElement.textContent = 'Out of Range'; 
+        soundDescriptionElement.style.backgroundColor = '#cccccc'; // Gray background
+        soundDescriptionElement.style.color = '#000000'; // Black text
+    }
+
+
+    const categoryElement = document.querySelector('.holder.rainDescription'); // Make sure this class is defined in your HTML
+
+    // Set category based on the rain percentage
+    if (rainPercentage === 0) {
+        categoryElement.textContent = "No Rain";
+        categoryElement.style.backgroundColor = "#00bf63"; // Green color
+    } else if (rainPercentage >= 1 && rainPercentage <= 10) {
+        categoryElement.textContent = "Light Rain";
+        categoryElement.style.backgroundColor = "#00bf63"; // Green color
+    } else if (rainPercentage >= 11 && rainPercentage <= 25) {
+        categoryElement.textContent = "Moderate Rain";
+        categoryElement.style.backgroundColor = "#ffbd59"; // Yellow color
+    } else if (rainPercentage >= 26 && rainPercentage <= 50) {
+        categoryElement.textContent = "Heavy Rain";
+        categoryElement.style.backgroundColor = "#ffbd59"; // Yellow color
+    } else if (rainPercentage >= 51 && rainPercentage <= 80) {
+        categoryElement.textContent = "Intense Rain";
+        categoryElement.style.backgroundColor = "#ff5757"; // Red color
+    } else if (rainPercentage >= 81 && rainPercentage <= 100) {
+        categoryElement.textContent = "Torrential Rain";
+        categoryElement.style.backgroundColor = "#ff5757"; // Red color
+    } else {
+        categoryElement.textContent = 'Out of Range'; 
+        categoryElement.style.backgroundColor = '#cccccc'; // Gray background
+    }
+    
+
+
+    // Refresh the gauges with updated colors
+    soundGauge.refresh(soundLevel);
+    rainGauge.refresh(rainAmount);
+
+    // Show popup if emailStatus is true and it's a new event
+    if (emailStatus && !previousWarningState) {
+        showPopup();
+    }
+
+    // Update the previous warning state
+    previousWarningState = emailStatus;
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -125,14 +109,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
         value: soundLevel,
         hideValue: true,
         min: 0,
-        max: 120,
+        max: 200,
         symbol: ' dB',
         pointer: true,
         gaugeWidthScale: 1,
         customSectors: [{
             color: '#ff5757', // Red for very heavy rain
-            lo: 91,
-            hi: 120
+            lo: 101,
+            hi: 200
         }, {
             color: '#00bf63', // Green for light rain
             lo: 0,
@@ -140,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }, {
             color: '#ffbd59', // Yellow for moderate rain
             lo: 51,
-            hi: 90
+            hi: 100
         }],
         counter: true
     });
@@ -151,22 +135,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
         value: rainAmount,
         hideValue: true,
         min: 0,
-        max: 100,
+        max: 1000,
         symbol: '%',
         pointer: true,
         gaugeWidthScale: 1,
         customSectors: [{
             color: '#ff5757', // Red for very heavy rain
-            lo: 81,
-            hi: 100
+            lo: 801,
+            hi: 1000
         }, {
             color: '#00bf63', // Green for light rain
             lo: 0,
-            hi: 40
+            hi: 400
         }, {
             color: '#ffbd59', // Yellow for moderate rain
-            lo: 41,
-            hi: 80
+            lo: 401,
+            hi: 800
         }],
         counter: true
     });
@@ -175,6 +159,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // Call the function
 // Refresh the data and chart every 500ms
-setInterval(fetchData, 500);
+setInterval(updateValueAct5, 500);
 
 

@@ -20,6 +20,19 @@ li {
     list-style: none;
 }
 
+.panel{
+    width: 90%;
+    margin: 20px auto;
+    padding: 30px;
+    border-bottom: #595959 1px solid;
+}
+
+
+.split {
+    display: flex;
+    align-items: center;
+}
+
 .activity-page {
     max-width: 80%;
     margin: 0 auto;
@@ -51,7 +64,16 @@ li {
     text-align: center;
     position: sticky;
     top: 0;
-    z-index: 100; /* Ensures it stays above other content */
+    z-index: 100;
+}
+
+#subTitle {
+    color: #2e2e2e;
+    width: 400px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #525252;
+    margin: 20px auto;
+    text-align: center;
 }
 
 .email{
@@ -92,4 +114,86 @@ li {
 
 ::placeholder{
     color: #fff;
+}
+
+
+/* Popup container - can be anything you want */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 60%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    color: #721c24;
+    text-align: center;
+}
+
+/* Popup message */
+.popup h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.popup p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Close button */
+.close-btn {
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #721c24;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.gauge {
+    width: 100%;
+    height: 240px;
+    justify-content: center;
+}
+
+
+.selector{
+    /* Basic appearance */
+    margin-bottom: 20px;
+    width: 200px;               /* Adjust width */
+    padding: 5px;               /* Add padding inside the select box */
+    font-size: 16px;            /* Text size */
+    font-weight: bold;
+    border: 2px solid #595959;  /* Border styling */
+    border-radius: 5px;         /* Rounded corners */
+    cursor: pointer;            /* Pointer cursor on hover */
+    text-align: center;
+    background-color: #e2e2e2;
+}
+
+.selector:hover {
+    background-color: #e2e2e2;  /* Change background on hover */
+}
+
+.selector:focus {
+    outline: none;              /* Remove outline on focus */
+    border-color: #506462;      /* Change border color on focus */
+}
+.selector {
+    background-color: #e2e2e2;
+    margin: 20px auto;
+    width: 200px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid #595959;
+    border-radius: 5px;
 }

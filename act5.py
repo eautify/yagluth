@@ -86,14 +86,18 @@ class ValueGetter:
                         
                         self.flaskRoutes.update_sensor_data(sound_val, rain_val, email_sent)
 
+                        soundPercentage = (sound_val / 1023.0) * 100
+                        rainPercentage = (rain_val / 1023.0) * 100
+
+
                         if sound_val >= 50:
                             threading.Thread(target=self.trigger_sound_led).start()
-
-                        if rain_val >= 41:
+                        
+                        if rainPercentage >= 40:
                             threading.Thread(target=self.trigger_rain_led).start()
 
                         # Trigger buzzer when both thresholds are met
-                        if sound_val >= 50 and rain_val >= 41:
+                        if soundPercentage >= 50 and rainPercentage >= 41:
                             threading.Thread(target=self.trigger_buzzer).start()                            
                             if not email_sent:
                                 self.emailSender.send_email(sound_val, rain_val)

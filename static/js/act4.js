@@ -1,156 +1,119 @@
-let gasValue;
-let myChart; // Declare a global variable for the chart instance
-let popupShown = false;  // Flag to track if popup has been shown
+// SCRIPT FOR GAUGE
+let gasGauge; // Declare gauge variable for gas
+let vibrationGauge; // Declare gauge variable for vibration
+
+let gasValue; // Example gas value
+let vibrationValue; // Example vibration value
+let emailStatus;
 let previousWarningState = false; // To track the previous warning state
 
-// Function to update the semicircle meter
-function updateSemicircleMeter(value) {
-    const ctx = document.getElementById('semicircleMeter').getContext('2d');
 
-    // Determine the background color based on the gas value
-    let backgroundColor;
-    if (value < 20) {
-        backgroundColor = '#4CAF50'; // Normal: below 20 ppm
-    } else if (value >= 20 && value <= 60) {
-        backgroundColor = '#ffbd59'; // Warning: 20 - 60 ppm
-    } else {
-        backgroundColor = '#ff5757'; // Danger: above 60 ppm
-    }
+document.addEventListener("DOMContentLoaded", function(event) {
+    // Initialize JustGage for gas
+    gasGauge = new JustGage({
+        id: 'gasGauge',
+        value: gasValue,
+        hideValue: true,
+        min: 0,
+        max: 60,
+        pointer: true,
+        gaugeWidthScale: 1,
+        counter: true
+    });
 
-    if (myChart) {
-        // Update the chart data and background color if the chart already exists
-        myChart.data.datasets[0].data = [value, 100 - value];
-        myChart.data.datasets[0].backgroundColor = [backgroundColor, '#ddd'];
-        myChart.update(); // Refresh the chart with the new data
-    } else {
-        // Create the chart for the first time
-        const data = {
-            datasets: [{
-                data: [value, 100 - value],
-                backgroundColor: [backgroundColor, '#ddd'], // Set initial background color
-                borderWidth: 0,
-                cutout: '75%',
-                circumference: 180,
-                rotation: 270,
-            }]
-        };
+    // Initialize JustGage for vibration
+    vibrationGauge = new JustGage({
+        id: 'vibrationGauge',
+        value: vibrationValue,
+        hideValue: true,
+        min: 0,
+        max: 1,
+        pointer: true,
+        gaugeWidthScale: 1,
+        counter: true
+    });
+});
 
-        const options = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                tooltip: { enabled: false },
-                legend: { display: false },
-            },
-            rotation: -Math.PI, // Start angle (270 degrees)
-            circumference: Math.PI, // End angle (180 degrees)
-        };
+// CODE FOR DISPLAYING VALUE
+async function updateValueAct4() {
 
-        myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: data,
-            options: options
-        });
-    }
-
-    // Update the displayed value
-    document.getElementById('meterValue').textContent = value;
-}
-
-// Function to fetch data from the server
-async function fetchData() {
     try {
-        const response = await fetch('/data'); // Fetch the data from the /data endpoint
+        const response = await fetch('/data');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        const data = await response.json(); // Parse the JSON response
 
-        gasValue = data.Gas; // Update gasValue with the fetched data.Gas
+        const data = await response.json();
+
+        // Store the data into variables
+        gasValue = data.Gas;
         vibrationValue = data.Vibration;
-        warningNotif = data.Warning;
-
-        // Update the HTML elements with the fetched data
-        document.getElementById('gasAnalogValue').textContent = gasValue; // Set gas value
-        document.getElementById('vibrationValue').textContent = data.Vibration ? 'Vibration Detected' : 'No Vibration Detected'; // Set vibration status
-
-        const gasDescriptionElement = document.getElementById('gasDescription');
-        const vibrationValueElement = document.getElementById('vibrationValue');
-
-        // Use if-else instead of switch-case for conditions
-        if (gasValue < 20) {
-            gasDescriptionElement.textContent = 'Safe';
-            gasDescriptionElement.style.backgroundColor = '#4CAF50'; // Green for Safe
-        } else if (gasValue >= 20 && gasValue <= 60) {
-            gasDescriptionElement.textContent = 'Warning';
-            gasDescriptionElement.style.backgroundColor = '#ffbd59'; // Yellow for Warning
-        } else {
-            gasDescriptionElement.textContent = 'Danger';
-            gasDescriptionElement.style.backgroundColor = '#ff5757'; // Red for Danger
-        }
-
-        if (!vibrationValue){
-            vibrationValueElement.style.backgroundColor = '#4CAF50'; // Green for No Vibration
-        } else {
-            vibrationValueElement.style.backgroundColor = '#ff5757'; // Red for Vibration Detected
-        }
-
-        // Show popup if warningNotif is true and it's a new event (previous state was false)
-        if (warningNotif && !previousWarningState) {
-            showPopup();
-        }
-
-        // Update the previous warning state
-        previousWarningState = warningNotif;
-
-        // Update the semicircle meter with the fetched gas value
-        updateSemicircleMeter(gasValue);
+        emailStatus = data.Email;
 
     } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
-}
-
-// Function to show the popup
-function showPopup() {
-    document.getElementById("popup").style.display = "block";
-    popupShown = true;  // Set the flag once the popup is shown
-}
-
-// Function to close the popup and reset the flag
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-    popupShown = false;  // Reset the flag so popup can show again for a new event
-}
-
-function validateEmail() {
-    var email = document.getElementById("email").value;
-    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
-    if (!emailRegex.test(email)) {
-        alert("Invalid Email Address");
-        return;
+        console.error('Error fetching data:', error);
+        
+        gasValue = 33;
+        vibrationValue = true;
+        emailStatus= 'Nan';
     }
 
-    // Send the email to Flask for saving
-    $.ajax({
-        type: 'POST',
-        url: '/save-email',
-        data: JSON.stringify({email: email}),
-        contentType: 'application/json',
-        success: function(response) {
-            alert(response.message);
-        },
-        error: function() {
-            alert("Error saving email.");
-        }
-    });
+    document.getElementById('gasAnalogValue').textContent = `${gasValue} ppm`; // Set gas value
+    document.getElementById('vibrationValue').textContent = vibrationValue ? 'Vibration Detected' : 'No Vibration Detected'; // Set vibration status
+
+    const gasDescription = document.getElementById('gasDescription'); // Corrected: getElementById (singular)
+    const vibrationDescription = document.getElementById('vibrationValue'); // Get vibration description element
+
+
+    // Change the gasDescription text and style based on the gas concentration value
+    if (gasValue < 20) {
+        // Normal
+        gasDescription.textContent = 'Normal: Gas concentration is within safe levels.';
+        gasDescription.style.color = '#008000'; // Green for safe
+        gasDescription.style.backgroundColor = '#E0FFE0'; // Light green background
+    } else if (gasValue >= 20 && gasValue <= 60) {
+        // Warning
+        gasDescription.textContent = 'Warning: Gas concentration is approaching a potentially unsafe level.';
+        gasDescription.style.color = '#FFA500'; // Orange for warning
+        gasDescription.style.backgroundColor = '#FFF5E0'; // Light orange background
+    } else if (gasValue > 60) {
+        // Danger
+        gasDescription.textContent = 'Danger: Gas concentration has reached a critical level and requires immediate action.';
+        gasDescription.style.color = '#FF0000'; // Red for danger
+        gasDescription.style.backgroundColor = '#FFE0E0'; // Light red background
+    } else {
+        // Default in case of invalid gas concentration value
+        gasDescription.textContent = 'Out of Range';
+        gasDescription.style.color = '#fff'; // Default text color
+        gasDescription.style.backgroundColor = '#cccccc'; // Default background color
+    }
+
+    // Update vibration description based on the vibration value
+    if (vibrationValue == false) {
+        vibrationDescription.textContent = 'No Vibration Detected';
+        vibrationDescription.style.color = '#00bf63'; // Green for safe
+        vibrationDescription.style.backgroundColor = '#E0FFE0'; // Light green background
+    } else if (vibrationValue == true) {
+        vibrationDescription.textContent = 'Vibration Detected';
+        vibrationDescription.style.color = '#ff5757'; // Red for alert
+        vibrationDescription.style.backgroundColor = '#FFE0E0'; // Light red background
+    } else {        
+        vibrationDescription.textContent = 'Out of Range';
+        vibrationDescription.style.color = '#fff'; // Red for alert
+        vibrationDescription.style.backgroundColor = '#cccccc'; // Light red background
+    }
+
+    // Update the gauge values dynamically if gasValue or vibrationValue changes
+    gasGauge.refresh(gasValue);
+    vibrationGauge.refresh(vibrationValue);
+
+    // Show popup if emailStatus is true and it's a new event
+    if (emailStatus && !previousWarningState) {
+        showPopup();
+    }
+
+    // Update the previous warning state
+    previousWarningState = emailStatus;
 }
 
-
-
-// Call the fetchData function when the page loads
-window.onload = fetchData;
-
-// Refresh the data and chart every 500ms
-setInterval(fetchData, 500);
+setInterval(updateValueAct4, 500); // Call update every 500ms
