@@ -16,6 +16,10 @@ body {
     overflow-x: hidden; /* This prevents the horizontal scroll bar */
 }
 
+div{
+    box-sizing: border-box;
+}
+
 li {
     list-style: none;
 }
@@ -25,12 +29,18 @@ li {
     margin: 20px auto;
     padding: 30px;
     border-bottom: #595959 1px solid;
+    text-align: center;
 }
 
 
 .split {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.left, .right{
+    width: 50%;
 }
 
 .activity-page {
