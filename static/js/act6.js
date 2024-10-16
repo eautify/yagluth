@@ -84,7 +84,6 @@ function postData() {
     // Update the GPS data display
     document.getElementById('longi').textContent = longitude;
     document.getElementById('lati').textContent = latitude;
-    document.getElementById('alti').textContent = altitude + ' m';
 
     // Convert to DMS format
     const dmsLat = toDMS(latitude) + latDir;

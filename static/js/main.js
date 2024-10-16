@@ -19,17 +19,18 @@ function validateEmail() {
         return;
     }
 
-    // Send the email to Flask for saving
-    $.ajax({
-        type: 'POST',
-        url: '/save-email',
-        data: JSON.stringify({ email: email }),
-        contentType: 'application/json',
-        success: function(response) {
-            alert(response.message);
+    fetch('/save-email', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json' // Send data as JSON
         },
-        error: function() {
-            alert("Error saving email.");
-        }
+        body: JSON.stringify({ email: email }) // Convert data to JSON string as a key-value pair
+    })
+    .then(response => response.json()) // Handle the response from Flask
+    .then(responseData => { // Using a more descriptive name for the response
+        console.log('Success:', responseData); // Process response data here
+    })
+    .catch((error) => {
+        console.error('Error:', error); // Handle any errors here
     });
 }

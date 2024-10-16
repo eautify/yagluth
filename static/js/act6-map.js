@@ -1,6 +1,8 @@
 let lat = 0;
 let lng = 0;
+let alt = 0; // To store altitude
 let map, marker;
+let lastSpokenCity = ""; // To store the last spoken city name
 
 // Initialize the map once
 function initMap() {
@@ -10,20 +12,37 @@ function initMap() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Initialize the marker at default coordinates
+    // Initialize the marker at default coordinates with popup
     marker = L.marker([lat, lng]).addTo(map);
+    marker.bindPopup("You are <b>HERE!</b>"); // Bind the popup once during initialization
 
     // Fetch and display the initial city name
-    getCityName(lat, lng);
+    getCityName(lat, lng, true); // Pass 'true' to indicate this is the initial load
+}
+
+// Text-to-Speech function
+function speakText(text) {
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text); // Create a new speech utterance
+        speechSynthesis.speak(utterance); // Speak the text
+    } else {
+        console.error('Text-to-Speech is not supported in this browser.');
+    }
 }
 
 // Fetch the city name using Nominatim Reverse Geocoding API
-function getCityName(lat, lng) {
+function getCityName(lat, lng, isInitialLoad = false) {
     fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
         .then(response => response.json())
         .then(data => {
             const city = data.display_name;
             document.getElementById('localPlace').innerText = city;
+
+            // Trigger TTS for the first load or if the city changes
+            if (isInitialLoad || city !== lastSpokenCity) {
+                speakText(`You are in ${city}`);
+                lastSpokenCity = city; // Update the last spoken city
+            }
         })
         .catch(error => {
             console.error('Error fetching city name:', error);
@@ -31,14 +50,38 @@ function getCityName(lat, lng) {
         });
 }
 
-// Update map view and marker position with new coordinates
+// Fetch the altitude using Open-Elevation API
+function getAltitude(lat, lng) {
+    fetch(`https://api.open-elevation.com/api/v1/lookup?locations=${lat},${lng}`)
+        .then(response => response.json())
+        .then(data => {
+            alt = data.results[0].elevation;
+            document.getElementById('alti').innerText = alt + ' meters';
+
+            // Update the marker popup with altitude
+            marker.bindPopup(`You are <b>HERE!</b><br>Altitude: ${alt} meters`).openPopup();
+        })
+        .catch(error => {
+            console.error('Error fetching altitude:', error);
+        });
+}
+
 function updateMap() {
     if (map && marker) {
-        map.setView([lat, lng]);  // Update map center
-        marker.setLatLng([lat, lng]); // Update marker position
+        // Force the map to recenter, optionally tweak zoom level for better effect
+        map.setView([lat, lng], map.getZoom(), { animate: true });  // Ensure the map recenters
+
+        // Update marker position
+        marker.setLatLng([lat, lng]);
+
+        // Open existing popup
+        marker.openPopup();
 
         // Fetch and display the updated city name
         getCityName(lat, lng);
+
+        // Fetch and display the updated altitude
+        getAltitude(lat, lng);
     }
 }
 

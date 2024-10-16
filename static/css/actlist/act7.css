@@ -1,0 +1,78 @@
+.container{
+    text-align: center;
+}
+
+.left{
+    width: 60%;
+}
+.right{
+    width: 40%;
+}
+.container{
+    width: 90%;
+    margin: 20px auto;
+    background-color: #EEEEEE;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+#subTitle{
+    color: #1aaab2;
+    border-bottom: 1px solid #1aaab2;
+}
+
+.ledDisplays{    
+    display: flex;
+    justify-content: space-evenly;
+    padding: 40px;
+}
+
+.display{
+    align-items: center;
+    text-align: center;
+}
+
+.dot {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.container h2, .container h3{
+    color: #1aaab2;
+    margin: 10px auto;
+}
+
+bold{
+    font-weight: bold;
+}
+
+#textpanel{
+    background-color: #dbdbdb;
+    padding: 20px;
+    width: 100%;
+    border-radius: 5px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Optional: For horizontal centering */
+}
+
+button {
+    background-color: #1aaab2;
+    margin: 10px auto;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    width: 100%;
+    text-decoration: none;
+    font-size: 16px; 
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#commandFeedback{
+    color: red;
+}
