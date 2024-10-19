@@ -64,15 +64,15 @@
                         <h2>YELLOW</h2>
                     </div>
                     <div class="display">
-                        <span id="indicatorBlue" class="dot" style="background-color: rgb(60, 60, 255);"></span>
+                        <span id="indicatorBlue" class="dot" style="background-color: blue;"></span>
                         <h2>BLUE</h2>
                     </div>
                     <div class="display">
-                        <span id="indicatorWhite" class="dot" style="background-color: whitesmoke;"></span>
+                        <span id="indicatorWhite" class="dot" style="background-color: white;"></span>
                         <h2>WHITE</h2>
                     </div>
                     <div class="display">
-                        <span id="indicatorRGB" class="dot" style="background-color: rgb(214, 0, 221);"></span>
+                        <span id="indicatorRGB" class="dot" style="background-color: green"></span>
                         <h2>RGB LED</h2>
                     </div>
                 </div>
@@ -86,19 +86,14 @@
                             Voice commands are displayed here
                         </div>
                         <button id="start-btn">Push to talk</button>
-                        <!-- <p id="commandFeedback">Command not understood, try again.</p> -->
+                        <p id="commandFeedback"></p>
                     </div>
                     <div class="right">
                         <h3>Voice Command Guide</h3>
                     
-                        <bold>Turn [color] LED On/Off</bold>
+                        <bold>Turn [color/all] LED [on/off] </bold>
                         <p>Example: "Turn red LED on."</p>
                         <p>Example: "Turn green LED off."</p>
-                        <br>
-                    
-                        <bold>Turn All LEDs On/Off</bold>
-                        <p>Example: "Turn all LEDs on."</p>
-                        <p>Example: "Turn all LEDs off."</p>
                         <br>
                     
                         <bold>Change RGB LED Color</bold>
@@ -106,20 +101,13 @@
                         <p>Example: "Change RGB to red."</p>
                         <br>
                     
-                        <bold>Blink [color] LED</bold>
+                        <bold>Blink [color/all] LED</bold>
                         <p>Example: "Blink yellow LED."</p>
-                        <p>Example: "Blink green LED."</p>
-                        <br>
-                    
-                        <bold>Blink All LEDs</bold>
                         <p>Example: "Blink all LEDs."</p>
                         <br>
                     
-                        <bold>Stop Blink [color] LED</bold>
+                        <bold>Stop blink [color/all] LED</bold>
                         <p>Example: "Stop blink blue LED."</p>
-                        <br>
-                    
-                        <bold>Stop Blink All LEDs</bold>
                         <p>Example: "Stop blink all LEDs."</p>
                         <br>
                     </div>
