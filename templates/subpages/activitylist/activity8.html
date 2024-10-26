@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity #8 - Yagluth's</title>
+    <link rel="stylesheet" href="../../../static/css/main.css">
+    <link rel="stylesheet" href="../../../static/css/nav.css">
+    <link rel="icon" href="../../../static/assets/yagluth.ico" type="image/x-icon">    
+    <script src="../../../static/js/nav.js"></script>
+    <link rel="stylesheet" href="../../../static/css/actlist/act8.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="../../index.html" id="logo">YAGLUTH's</a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+            <span id="indicator" class="nav-toggle-bar"></span>
+            <span id="indicator" class="nav-toggle-bar"></span>
+            <span id="indicator" class="nav-toggle-bar"></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li>
+                <a class="dropdown-arrow" onclick="toggleSubMenu()">Activity lists</a>
+                <ul class="sub-menus">
+                    <li><a href="activity1.html">Activity #1</a></li>
+                    <li><a href="activity2.html">Activity #2</a></li>
+                    <li><a href="activity3.html">Activity #3</a></li>
+                    <li><a href="activity4.html">Activity #4</a></li>
+                    <li><a href="activity5.html">Activity #5</a></li>
+                    <li><a href="activity6.html">Activity #6</a></li>
+                    <li><a href="activity7.html">Activity #6</a></li>
+                    <li><a href="activity8.html" class="active">Activity #8</a></li>
+                </ul>
+            </li>
+            <li><a href="../developers.html">Developers</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Panel -->
+    <div class="main-panel">
+        <div class="actBody">
+            <div class="actTitle">
+                <h1>Text to Speech</h1>
+                <p>This activity focuses on converting text into audible speech using a text-to-speech module.</p>
+            </div>
+
+            <div class="container">
+                <div class="split">
+                    <div class="left">
+                        <h3 id="writeTitle">Write your text here...</h3>
+                        <textarea id="input-textarea" placeholder="Type your text here..."></textarea>
+                        <button id="talkButton">Push to talk</button>
+                        <select  id="mySelect">
+                            <option value="en">English (en)</option>
+                            <option value="tl">Filipino (tl)</option>
+                            <option value="es">Spanish (es)</option>
+                            <option value="fr">French (fr)</option>
+                            <option value="de">German (de)</option>
+                            <option value="it">Italian (it)</option>
+                            <option value="nl">Dutch (nl)</option>
+                            <option value="pt">Portuguese (pt)</option>
+                            <option value="ru">Russian (ru)</option>
+                            <option value="zh">Chinese (zh)</option>
+                            <option value="ja">Japanese (ja)</option>
+                            <option value="ko">Korean (ko)</option>
+                            <option value="ar">Arabic (ar)</option>
+                            <option value="hi">Hindi (hi)</option>
+                            <option value="th">Thai (th)</option>
+                            <option value="vi">Vietnamese (vi)</option>
+                            <option value="tr">Turkish (tr)</option>
+                        </select>
+                        <p id="message"></p>
+                        <button id="generateSpeech">Generate</button>
+                    </div>
+                    <div class="right">
+                        
+                        <div id="siri-container" style="height: 200px; width: 100%; padding: 5px;"></div>
+                        <audio id="audioPlayer" controls>
+                            <source src="apt.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="button-container">
+                            <button class="custom-button" id="loop-toggle">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button class="custom-button" id="backward">
+                                <i class="fas fa-backward"></i>
+                            </button>
+                            <button class="custom-button" id="forward">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                            <button class="custom-button" id="download">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                        <div class="speed-control">
+                            <label for="playbackSpeed">Playback Speed:</label>
+                            <input type="range" id="playbackSpeed" min="0.5" max="2" step="0.1" value="1" />
+                            <span id="speedValue">1.0x</span> <!-- Display current speed -->
+                        </div>
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+
+        </div>
+
+
+    </div>
+    
+    <script src="../../../static/js/act8.js"></script>
+</body>
+</html>

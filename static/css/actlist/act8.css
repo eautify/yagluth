@@ -1,0 +1,162 @@
+.left {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align items if desired */
+    gap: 5px;
+    padding: 20px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align items if desired */
+    padding: 20px;
+    gap: 10px;
+}
+
+
+#input-textarea {
+    width: 100%;
+    height: 150px; /* Adjust as needed */
+    font-size: 30px; /* Font size */
+    padding: 10px; /* Padding for text */
+    text-align: center; /* Center text horizontally */
+    vertical-align: middle; /* Center text vertically */
+    resize: none; /* Prevent resizing */
+    border: 2px solid #1aaab2; /* Border style */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-sizing: border-box;
+}
+
+
+
+button, select {
+    background-color: #1aaab2;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    width: 100%;
+    font-size: 16px; 
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+select {
+    border: 2px solid #333;
+    background-color: #595959;
+    padding: 5px;
+    text-align: center;
+}
+
+button:hover{    
+    background-color: #00a3ac;
+}
+
+#writeTitle{
+    color: #00a3ac;
+}
+
+control{
+    cursor: pointer;
+    font-size: 30px;
+}
+control:hover{
+    background-color: #00a3ac;
+    border-radius: 5px;
+}
+
+
+#generateSpeech{
+    margin: 20px auto;
+}
+
+.button-container {
+    display: flex;
+    gap: 15px;
+}
+
+.custom-button {
+    background: none; /* No background */
+    border: none; /* No border */
+    padding: 10px; /* Padding for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.2s; /* Smooth transformation */
+}
+
+.custom-button i {
+    font-size: 30px; /* Larger icon size */
+    color: #333; /* Dark blue color for icons */
+}
+
+.custom-button:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.custom-button:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+}
+
+
+
+
+.slidersection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between sliders */
+    align-items: center;
+}
+
+.sliders {
+    -webkit-appearance: none; /* Remove default styling for Webkit browsers */
+    width: 300px;
+    height: 8px; /* Slider height */
+    border-radius: 5px; /* Rounded track */
+    background: #fff; /* Track color */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Pointer cursor */
+    display: block;
+}
+
+.sliders::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling for thumb */
+    appearance: none; /* Remove default styling for thumb */
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    border-radius: 50%; /* Circular thumb */
+    background: #1cabb2; /* Thumb color */
+    cursor: pointer; /* Pointer cursor */
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* Shadow on thumb */
+}
+
+.sliders::-moz-range-thumb {
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    border-radius: 50%; /* Circular thumb */
+    background: #1cabb2; /* Thumb color */
+    cursor: pointer; /* Pointer cursor */
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* Shadow on thumb */
+}
+
+label {
+    font-weight: bold; /* Bold labels */
+    color: #333; /* Darker text color */
+}
+
+span {
+    font-size: 14px; /* Font size for values */
+    color: #555; /* Grey text color for values */
+}
+
+
+
+#siri-container{
+    width: 80%;
+    padding: 20px;
+    height: 100px;
+}
+
+#audioPlayer{
+    width: 100%;
+}
